@@ -1,11 +1,9 @@
 <template>
-  <div class="logo">
-    <router-link tag="span" :to="path">
+    <router-link class="logo" tag="span" :to="path">
       <a :class="classList">
         <slot></slot>
       </a>
     </router-link>
-  </div>
 </template>
 
 <script>
@@ -20,7 +18,7 @@ export default {
       default: 'medium',
       validator (size) {
         // The value must match one of these strings
-        return ['small', 'medium', 'big'].indexOf(size) !== -1
+        return ['small', 'medium'].indexOf(size) !== -1
       }
     }
   },
@@ -36,18 +34,23 @@ export default {
 
 <style lang="scss">
   .logo {
-    font-weight: 700;
     a {
+      font-weight: 700;
       text-decoration: none;
+      padding: 5px 10px;
+      border: 1px solid hsl(48, 100%, 67%);
+      border-radius: 10px;
+      color: hsl(48, 100%, 67%);
+      transition: color 0.3s;
+      &:hover {
+        color: hsl(48, 57%, 54%);
+      }
     }
     &__link--small {
       font-size: 24px;
     }
     &__link--medium {
       font-size: 45px;
-    }
-    &__link--big {
-      font-size: 65px;
     }
   }
 </style>

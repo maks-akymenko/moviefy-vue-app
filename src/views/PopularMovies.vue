@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    Welcome to the Moviefy
+  <div class="movies" >
+    <single-movie 
+      v-if="movies" 
+      class="movie" 
+      v-for="movie in movies" 
+      :movie="movie" 
+      :key="movie.id">
+    </single-movie>
+    <div v-else>Loading...</div>
   </div>
 </template>
 
 <script>
 import{ getPopularMovies } from '../services/api'
+import SingleMovie from '../components/SingleMovie'
 
 export default {
   name: 'popular-movies',
+  components: {
+    SingleMovie
+  },
   data () {
     return {
-      movies: []
+      movies: [],
+      error: null,
     }
   },
   async created () {
@@ -21,8 +32,30 @@ export default {
       this.movies = response.data.results
     }
     catch (err) {
-      console.log(err)
+      this.error = err
     }
   }
 }
 </script>
+
+<style lang="scss">
+.movies {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  .movie {
+    flex: 1 0 30%;
+    padding: 20px;
+    box-sizing: border-box;
+    &__link-wrapper {
+      color: white;
+    }
+    &__poster {
+      border-radius: 5px;
+    }
+    &__title {
+      font-size: 36px;
+    }
+  }
+}
+</style>
