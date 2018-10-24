@@ -12,21 +12,32 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/movies'
+    },
+    {
+      path: '/movies',
       name: 'popular-movies',
-      component: PopularMovies
+      component: PopularMovies,
+      beforeEnter (to, from, next) {
+        if (to.query.page < 1) {
+          next({
+            name: 'popular-movies',
+            query: { page: 1 }
+          })
+        } else {
+          next()
+        }
+      },
+      props: route => {
+        return {
+          page: route.query.page || 1
+        }
+      }
     },
     {
       path: '/movies/:id',
       name: 'movie',
       component: () => import(/* webpackChunkName: "movie" */ './views/MoviePage.vue')
     }
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    // }
   ]
 })

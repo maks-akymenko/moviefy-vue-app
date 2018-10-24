@@ -13,7 +13,7 @@
 <script>
 import Logo from './Logo'
 import SearchBar from './SearchBar'
-import LogButton from './user/LogButton'
+import LogButton from './LogButton'
 
 export default {
   components: {

@@ -8,8 +8,8 @@ const axiosMovieDB = axios.create({
   }
 })
 
-export function getPopularMovies () {
-  return axiosMovieDB('3/movie/popular')
+export function getPopularMovies (params) {
+  return axiosMovieDB('3/movie/popular', { params })
 }
 
 export function getMovie (movieId) {
