@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PopularMovies from './views/PopularMovies.vue'
+import PopularMovies from './views/PopularMovies'
+import MoviePage from './views/MoviePage'
 
 Vue.use(Router)
 
@@ -13,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'popular-movies',
       component: PopularMovies
+    },
+    {
+      path: '/movies/:id',
+      name: 'movie',
+      component: () => import(/* webpackChunkName: "movie" */ './views/MoviePage.vue')
     }
     // {
     //   path: '/about',

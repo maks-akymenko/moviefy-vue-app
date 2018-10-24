@@ -11,3 +11,7 @@ const axiosMovieDB = axios.create({
 export function getPopularMovies () {
   return axiosMovieDB('3/movie/popular')
 }
+
+export function getMovie (movieId) {
+  return axiosMovieDB(`3/movie/${movieId}`)
+}

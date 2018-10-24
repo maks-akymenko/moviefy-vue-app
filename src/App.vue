@@ -1,22 +1,21 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <navigation></navigation>
-      <router-link to="/">Home</router-link> |
+  <div id="app" class="has-background-dark">
+    <div class="container">
+      <Header></Header>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-import Navigation from './components/Navigation'
+import Header from './components/Header'
+
 export default {
   components: {
-    Navigation
+    Header
   }
 }
 </script>
 
 <style lang="scss">
- 
 </style>
