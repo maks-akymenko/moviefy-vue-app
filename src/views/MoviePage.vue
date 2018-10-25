@@ -21,7 +21,6 @@ export default {
     try {
       const response = await getMovie(this.$route.params.id)
       this.movie = response.data
-      console.log(this.movie)
     }
     catch (error) {
       this.error = error

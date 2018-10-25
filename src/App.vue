@@ -1,18 +1,18 @@
 <template>
-  <div id="app" class="has-background-dark">
+  <div id="app" class="has-background-black-bis">
     <div class="container">
-      <Header></Header>
+      <navbar></navbar>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-import Header from './components/Navbar/Header'
+import Navbar from './components/Navbar/Navbar'
 
 export default {
   components: {
-    Header
+    Navbar
   }
 }
 </script>

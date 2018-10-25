@@ -1,24 +1,30 @@
 <template>
-<div class="container">
-  <pagination :current-page="page" route-name="popular-movies"></pagination>
-  <h1 class="popular-movies__header">Popular movies</h1>
-  <div v-if="loading">Loading...</div>
-  <div v-else class="movies" >
-    <single-movie 
-      v-if="movies" 
-      class="movie" 
-      v-for="movie in movies" 
-      :movie="movie" 
-      :key="movie.id">
-    </single-movie>
+  <div class="popular-movies section">
+    <section class="container is-fluid">
+      <heading>Popular movies</heading>
+
+      <pagination :current-page="page" :total-pages="totalPages" route-name="popular-movies"></pagination>
+  
+      <div class="columns is-multiline popular-movies__results" >
+        <div type="cards" v-show="loading">Loading...</div>
+
+        <div
+        class="column is-12 is-half-desktop is-4-fullhd"
+        v-for="movie in movies"
+        :key="movie.id">
+
+          <single-movie :movie="movie" />
+        </div>
+      </div>
+      <pagination :current-page="page" :total-pages="totalPages" route-name="popular-movies"></pagination>
+    </section>
   </div>
-</div>
 </template>
 
 <script>
 import SingleMovie from '../components/SingleMovie'
 import Pagination from '../components/Pagination'
-
+import Heading from '../components/Heading'
 import{ getPopularMovies } from '../services/api'
 
 import to from 'await-to-js';
@@ -27,48 +33,49 @@ export default {
   name: 'popular-movies',
   components: {
     SingleMovie,
-    Pagination
+    Pagination,
+    Heading
   },
   props: {
-    page: Number,
-    default: 1
+    page: {
+      type: Number,
+      default: 1
+    }
   },
   data () {
     return {
       movies: [],
-      error: null,
-      loading: false
+      loading: false,
+      totalPages: 0
+    }
+  },
+  methods: {
+    async fetchPopularMovies (page) {
+      this.loading = true
+      const [error, response] = await to(getPopularMovies({ page }))
+      if (error) throw error
+      if (response) {
+        this.movies = response.data.results
+        this.totalPages = response.data.total_pages
+      }
+      this.loading = false
+    }
+  },
+  watch: {
+    page (newPage) {
+      this.fetchPopularMovies(newPage)
     }
   },
   async created () {
-    this.loading = true
-    const [error, response] = await to(getPopularMovies({ page: this.page}))
-    if (response) this.movies = response.data.results
-    if (error) throw error
-    this.loading = false
-    console.log(this.page)
+    this.fetchPopularMovies(this.page)
   }
 }
 </script>
 
 <style lang="scss">
-.movies {
-  display: flex;
-  text-align: center;
-  flex-wrap: wrap;
-  .movie {
-    flex: 1 0 30%;
-    padding: 20px;
-    box-sizing: border-box;
-    &__link-wrapper {
-      color: white;
-    }
-    &__poster {
-      border-radius: 5px;
-    }
-    &__title {
-      font-size: 36px;
+  .popular-movies {
+    &__results {
+      min-height: 450px;
     }
   }
-}
 </style>

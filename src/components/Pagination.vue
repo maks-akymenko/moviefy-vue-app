@@ -1,16 +1,34 @@
 <template>
   <div class="pagination">
-    <router-link :to="{ name: routeName, query: previousPageQuery }" class="pagination__button">Prev page</router-link>
-    <router-link :to="{ name: routeName, query: nextPageQuery }" class="pagination__button">Next page</router-link>
+    <router-link 
+      tag="button"
+      :disabled="!previousPageExists"
+      :to="{ name: routeName, query: previousPageQuery }" 
+      class="button is-warning is-rounded is-medium">Previous page</router-link>
+
+    <span class="pagination__results">
+      Page <span class="title is-4">{{ currentPage }}</span> out of <span class="title is-4">{{ totalPages }}</span>
+    </span>
+
+    <router-link
+      tag="button"
+      :disabled="!nextPageExists"
+      :to="{ name: routeName, query: nextPageQuery }" 
+      class="button is-warning is-rounded is-medium">Next page</router-link>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    totalPages: {
+      type: Number,
+      required: true
+    },
     currentPage: {
       type: Number,
-      default: 1
+      default: 1,
+      required: true
     },
     routeName: {
       type: String,
@@ -18,6 +36,12 @@ export default {
     },
   },
   computed: {
+    previousPageExists () {
+      return this.currentPage > 1
+    },
+    nextPageExists () {
+      return this.currentPage < this.totalPages
+    },
     previousPage () {
       return this.currentPage - 1
     },
@@ -40,14 +64,16 @@ export default {
         ...this.commonQuery,
         page: this.nextPage
       }
-    },
+    }
   }
 }
 </script>
 
 <style lang="scss">
+@import '~bulma/sass/utilities/all';
   .pagination {
-    display: flex;
-    justify-content: space-around;
+    padding: 2rem 0;
+  }
+    @include mobile {
   }
 </style>

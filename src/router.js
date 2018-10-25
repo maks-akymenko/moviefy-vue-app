@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import PopularMovies from './views/PopularMovies'
+// eslint-disable-next-line
 import MoviePage from './views/MoviePage'
 
 Vue.use(Router)
@@ -22,7 +23,7 @@ export default new Router({
         if (to.query.page < 1) {
           next({
             name: 'popular-movies',
-            query: { page: 1 }
+            query: { page: '1' }
           })
         } else {
           next()
@@ -30,7 +31,7 @@ export default new Router({
       },
       props: route => {
         return {
-          page: route.query.page || 1
+          page: Number(route.query.page || 1)
         }
       }
     },
