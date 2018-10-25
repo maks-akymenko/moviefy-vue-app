@@ -34,6 +34,7 @@ export default {
 
 <style lang="scss">
   .logo {
+    z-index: 10;
     a {
       font-weight: 700;
       text-decoration: none;

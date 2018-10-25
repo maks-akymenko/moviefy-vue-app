@@ -7,7 +7,7 @@
       class="button is-warning is-rounded is-medium">Previous page</router-link>
 
     <span class="pagination__results">
-      Page <span class="title is-4">{{ currentPage }}</span> out of <span class="title is-4">{{ totalPages }}</span>
+      Page <span class="title is-4 has-text-white-ter">{{ currentPage }}</span> out of <span class="title is-4 has-text-white-ter">{{ totalPages }}</span>
     </span>
 
     <router-link
