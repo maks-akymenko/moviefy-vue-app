@@ -6,29 +6,21 @@
       </router-link>
 
       <div class="single-movie__info">
-        <h2 class="single-movie__title title is-size-4 has-text-white-ter">{{ movie.title }}</h2>
-        <span class="single-movie__release-data is-size-6 has-text-weight-bold has-text-white-ter">Release: 
-          <span class="has-text-warning">{{movie.release_date | formatDate }}</span>
-        </span>
-        <div>Genres here</div>
+
+        <router-link :to="movieLink">
+        <h2 class="single-movie__title title is-size-5 has-text-white-ter">{{ movie.title }}({{ formattedDate }})</h2>
+        </router-link>
         <p class="has-text-white-ter">{{ shortDescription }}</p>
+        <div>Like button</div>
+        <div>Genres here</div>
       </div>
   </div>
 </template>
 
 <script>
-import { truncate } from '../shared/utils/textUtils'
+import { truncate, formatDate } from '../shared/utils/textAndDateUtils'
 
 export default {
-  filters: {
-    formatDate (value) {
-      if (!value) return ''
-      return value
-        .split('-')
-        .sort((a, b) => a > b ? 1 : -1)
-        .join('-')
-    }
-  },
   props: {
     movie: {
       type: Object,
@@ -41,11 +33,15 @@ export default {
         path: `/movies/${this.movie.id}`
       }
     },
+    formattedDate () {
+      return this.movie.release_date 
+        ? formatDate(this.movie.release_date)
+        : ''
+    },
     posterPath () {
-      console.log(this.movie)
       return this.movie.poster_path 
-      ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + this.movie.poster_path
-      : ''
+        ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + this.movie.poster_path
+        : ''
     },
     shortDescription () {
       return truncate(this.movie.overview || '', 180)
@@ -65,11 +61,11 @@ export default {
     // &:hover {
     //   transform: rotateZ(-2deg);
     // }
-    &__title {
-      height: 5rem;
-    }
     &__poster {
       border-radius: $border-radius;
+    }
+    &__title {
+      margin: 1.5rem 0;
     }
     &__info {
       width: 40%;
