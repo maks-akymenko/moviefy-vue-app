@@ -9,7 +9,7 @@
         <div type="cards" v-show="loading">Loading...</div>
 
         <div
-        class="column is-12 is-half-desktop is-4-fullhd"
+        class="column is-12 is-half-desktop is-half-fullhd"
         v-for="movie in movies"
         :key="movie.id">
 
@@ -80,9 +80,5 @@ export default {
 </script>
 
 <style lang="scss">
-  .popular-movies {
-    &__results {
-      min-height: 450px;
-    }
-  }
+
 </style>

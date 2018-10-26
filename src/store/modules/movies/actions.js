@@ -1,4 +1,5 @@
 import { getPopularMovies, getMoviesGenres } from '../../../services/api'
+import { normalizeArray } from '../../utils'
 import to from 'await-to-js'
 
 const actions = {
@@ -11,7 +12,14 @@ const actions = {
     const [error, response] = await to(getMoviesGenres())
 
     if (error) throw error
-    if (response) console.log(response.data)
+    if (response) {
+      const genres = response.data.genres
+
+      const normalized = normalizeArray(genres)
+
+      commit('SET_MOVIE_GENRES_MAP', normalized.entities.map)
+      commit('SET_MOVIE_GENRES_IDS', normalized.result.array)
+    }
   }
 }
 

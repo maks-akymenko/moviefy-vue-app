@@ -3,7 +3,9 @@ import mutations from './mutations'
 import actions from './actions'
 
 const state = {
-  favoriteMovies: []
+  favoriteMovies: [],
+  genresIds: [],
+  genresMap: {}
 }
 
 export default {

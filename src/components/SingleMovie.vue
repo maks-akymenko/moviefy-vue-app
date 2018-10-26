@@ -12,15 +12,21 @@
         </router-link>
         <p class="has-text-white-ter">{{ shortDescription }}</p>
         <div>Like button</div>
-        <div>Genres here</div>
+        <div class="single-movie__genres" >
+          <genres :genres="movie.genre_ids"></genres>
+        </div>
       </div>
   </div>
 </template>
 
 <script>
 import { truncate, formatDate } from '../shared/utils/textAndDateUtils'
+import Genres from './Genres'
 
 export default {
+  components: {
+    Genres
+  },
   props: {
     movie: {
       type: Object,
@@ -57,6 +63,7 @@ export default {
     padding: 10px;
     border-radius: $border-radius;
     display: flex;
+    min-height: 350px;
     // transition: transform 0.33s;
     // &:hover {
     //   transform: rotateZ(-2deg);
@@ -68,13 +75,16 @@ export default {
       margin: 1.5rem 0;
     }
     &__info {
-      width: 40%;
-      height: 100%;
+      width: 50%;
       display: flex;
       flex-direction: column;
+      justify-content: space-around;
       text-align: center;
       margin: 0 auto;
       flex: none;
+    }
+    &__genres {
+      
     }
   }
 </style>
