@@ -6,11 +6,18 @@
           <div class="movie__full-info">
             <h1 class="has-text-white-ter is-size-2 has-text-centered has-text-weight-bold">{{ movie.title }}({{ formattedDate }})</h1>
             <p v-if="movie.tagline.length > 0" class="is-size-4 has-text-white-ter has-text-centered">"{{ movie.tagline }}"</p>
+            <div class="movie__icons">
+              <heart-icon></heart-icon>
+              <movie-rating
+              :rating="movie.vote_average"
+              :votes-count="movie.vote_count">
+              </movie-rating>
+              <share-icon></share-icon>
+            </div>
             <h4 class="has-text-white-ter is-size-3 has-text-weight-bold">Overview:</h4>
             <p class="movie__overview has-text-white-ter is-size-5">
               {{ movie.overview }}
             </p>
-            <span>Rating: {{ formattedRating }}</span>
           </div>
         </div>
   </div>
@@ -18,21 +25,30 @@
 
 <script>
 import to from 'await-to-js';
-import { getMovie } from '../services/api'
-import { formatDate, formatRating } from '../shared/utils/textAndDateUtils'
+import { getMovie, getMovieCredits } from '../services/api'
+import { formatDate } from '../shared/utils/textAndDateUtils'
 
 import Heading from '../components/Heading'
+import MovieRating from '../components/MovieRating'
+import HeartIcon from '../components/icons/HeartIcon'
+import ShareIcon from '../components/icons/ShareIcon'
 
 export default {
   name: 'movie',
   components: {
-    Heading
+    Heading,
+    MovieRating,
+    HeartIcon,
+    ShareIcon
   },
   data () {
     return {
       movie: null,
       error: null,
     }
+  },
+  methods: {
+
   },
   async created () {
     const [error, response] = await to(getMovie(this.$route.params.id))
@@ -55,9 +71,6 @@ export default {
       return this.movie.release_date 
         ? formatDate(this.movie.release_date )
         : ''
-    },
-    formattedRating () {
-      return formatRating(this.movie.vote_average)
     }
   }
 }
@@ -101,6 +114,11 @@ export default {
       }
       &__poster {
         border-radius: $border-radius;
+      }
+      &__icons {
+        display: flex;
+        justify-content: space-around;
+        margin: 1.5rem 0;
       }
     }
   }
