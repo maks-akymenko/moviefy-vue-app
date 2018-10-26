@@ -9,7 +9,7 @@
       <div class="movie-rating__info-box">
       <span class="movie-rating__rating-box">
         <span
-          class="title movie-rating__rating"
+          class="movie-rating__rating"
           :class="ratingExist
             ? 'is-3'
             : 'is-6' 
@@ -55,6 +55,7 @@ export default {
   align-items: center;
   &__rating {
     font-weight: 500;
+    font-size: 2rem;
     color: whitesmoke;
   }
   &__icon {

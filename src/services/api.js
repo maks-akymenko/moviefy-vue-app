@@ -9,7 +9,9 @@ const axiosMovieDB = axios.create({
 })
 
 export function getPopularMovies (params) {
-  return axiosMovieDB('3/movie/popular', { params })
+  return axiosMovieDB('3/movie/popular', {
+    params
+  })
 }
 
 export function getMovie (movieId) {
@@ -22,4 +24,8 @@ export function getMovieCredits (movieId) {
 
 export function getMoviesGenres () {
   return axiosMovieDB('3/genre/movie/list')
+}
+
+export function getSimilarMovies (movieId) {
+  return axiosMovieDB(`3/movie/${movieId}/similar`)
 }

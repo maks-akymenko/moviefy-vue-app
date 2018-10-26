@@ -20,6 +20,7 @@
             </p>
           </div>
         </div>
+        <movie-slider :similar-movies="similarMovies"></movie-slider>
   </div>
 </template>
 
@@ -33,6 +34,7 @@ import MovieRating from '../components/MovieRating'
 import HeartIcon from '../components/icons/HeartIcon'
 import ShareIcon from '../components/icons/ShareIcon'
 import Genres from '../components/Genres'
+import MovieSlider from '../components/MovieSlider'
 
 export default {
   name: 'movie',
@@ -41,19 +43,34 @@ export default {
     MovieRating,
     HeartIcon,
     ShareIcon,
-    Genres
+    Genres,
+    MovieSlider
   },
   data () {
     return {
       movie: null,
-      error: null,
+      similarMovies: []
+    }
+  },
+  methods: {
+  async fetchMovie (id) {
+      const [error, response] = await to(getMovie(id))
+
+        if (error) throw error
+        if (response) this.movie = response.data
+  },
+  async fetchSimilarMovies (id) {
+    const [error, response] = await to(this.$store.dispatch('getSimilarMovies', id))
+
+      if (error) throw error
+      if (response) this.similarMovies = response.results
     }
   },
   async created () {
-    const [error, response] = await to(getMovie(this.$route.params.id))
-    if (error) throw error
-    if (response) this.movie = response.data
-    console.log(this.movie)
+    await Promise.all([
+      this.fetchMovie(this.$route.params.id),
+      this.fetchSimilarMovies(this.$route.params.id)
+    ])
   },
   computed: {
     getGenresId () {
@@ -120,6 +137,7 @@ export default {
       &__icons {
         display: flex;
         justify-content: space-around;
+        align-items: center;
         margin: 1.5rem 0;
       }
     }
