@@ -50,24 +50,31 @@ export default {
     }
   },
   methods: {
+    async getMoviesForCurrentPage () {
+      return this.fetchPopularMovies({ page: this.page })
+    },
     async fetchPopularMovies (page) {
       this.loading = true
-      const [error, response] = await to(getPopularMovies({ page }))
+      const [error, response] = await to(this.$store.dispatch('getPopularMovies', { page }))
+
       if (error) throw error
       if (response) {
-        this.movies = response.data.results
-        this.totalPages = response.data.total_pages
+        this.movies = response.results
+        this.totalPages = response.total_pages
       }
       this.loading = false
     }
   },
   watch: {
     page (newPage) {
-      this.fetchPopularMovies(newPage)
+      this.getMoviesForCurrentPage()
     }
   },
   async created () {
-    this.fetchPopularMovies(this.page)
+    await Promise.all([
+    this.$store.dispatch('getMoviesGenres'),
+    this.getMoviesForCurrentPage()
+    ])
   }
 }
 </script>

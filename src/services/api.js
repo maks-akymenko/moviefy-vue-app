@@ -17,5 +17,9 @@ export function getMovie (movieId) {
 }
 
 export function getMovieCredits (movieId) {
-  return axiosMovieDB(`/movie/${movieId}/credits`)
+  return axiosMovieDB(`3/movie/${movieId}/credits`)
+}
+
+export function getMoviesGenres () {
+  return axiosMovieDB('3/genre/movie/list')
 }
