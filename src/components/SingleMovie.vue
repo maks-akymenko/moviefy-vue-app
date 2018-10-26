@@ -11,9 +11,15 @@
         <h2 class="single-movie__title title is-size-5 has-text-white-ter">{{ movie.title }}({{ formattedDate }})</h2>
         </router-link>
         <p class="has-text-white-ter">{{ shortDescription }}</p>
-        <div>Like button</div>
+        <div class="single-movie__rate-like">
+          <heart-icon></heart-icon>
+          <movie-rating
+            :rating="movie.vote_average"
+            :votes-count="movie.vote_count"
+          ></movie-rating>
+        </div>
         <div class="single-movie__genres" >
-          <genres :genres="movie.genre_ids"></genres>
+          <genres v-if="movie.genre_ids" size="small" :genres="movie.genre_ids"></genres>
         </div>
       </div>
   </div>
@@ -22,10 +28,14 @@
 <script>
 import { truncate, formatDate } from '../shared/utils/textAndDateUtils'
 import Genres from './Genres'
+import MovieRating from './MovieRating'
+import HeartIcon from './icons/HeartIcon'
 
 export default {
   components: {
-    Genres
+    Genres,
+    MovieRating,
+    HeartIcon
   },
   props: {
     movie: {
@@ -83,8 +93,9 @@ export default {
       margin: 0 auto;
       flex: none;
     }
-    &__genres {
-      
+    &__rate-like {
+      display: flex;
+      justify-content: space-around;
     }
   }
 </style>

@@ -32,6 +32,7 @@ import Heading from '../components/Heading'
 import MovieRating from '../components/MovieRating'
 import HeartIcon from '../components/icons/HeartIcon'
 import ShareIcon from '../components/icons/ShareIcon'
+import Genres from '../components/Genres'
 
 export default {
   name: 'movie',
@@ -39,16 +40,14 @@ export default {
     Heading,
     MovieRating,
     HeartIcon,
-    ShareIcon
+    ShareIcon,
+    Genres
   },
   data () {
     return {
       movie: null,
       error: null,
     }
-  },
-  methods: {
-
   },
   async created () {
     const [error, response] = await to(getMovie(this.$route.params.id))
@@ -57,6 +56,9 @@ export default {
     console.log(this.movie)
   },
   computed: {
+    getGenresId () {
+      return this.movie.genres.map(genre => genre.id)
+    },
     backdropLink () {
       return this.movie.backdrop_path
         ? 'https://image.tmdb.org/t/p/w1280/' + this.movie.backdrop_path

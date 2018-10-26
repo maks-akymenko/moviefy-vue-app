@@ -1,6 +1,11 @@
 <template>
 <div>
-  <button class="genre button is-warning is-rounded is-small" v-for="genre in getGenres" :key="Math.random() * genre.id">
+  <button 
+    v-if="genres" 
+    class="genre button is-warning is-rounded is-small" 
+    :class="[`genre__size--${size}`]"
+    v-for="genre in getGenres" 
+    :key="Math.random() * genre.id">
     {{ genre.name }}
   </button>
 </div>
@@ -12,11 +17,18 @@ export default {
     genres: {
       type: Array,
       required: true
+    },
+    size: {
+      type: String,
+      default: 'small',
+      validator (size) {
+        return ['small', 'big'].indexOf(size) !== -1
+      }
     }
   },
   computed: {
     getGenres () {
-      return this.genres.map(genre => this.$store.getters.getGenre(genre))
+      return this.genres.map(id => this.$store.getters.getGenre(id))
     },
   }
 }
