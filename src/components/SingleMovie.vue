@@ -12,7 +12,7 @@
         </router-link>
         <p class="has-text-white-ter">{{ shortDescription }}</p>
         <div class="single-movie__rate-like">
-          <heart-icon></heart-icon>
+          <favorite-movie-button :movieId="movie.id"></favorite-movie-button>
           <movie-rating
             :rating="movie.vote_average"
             :votes-count="movie.vote_count"
@@ -29,18 +29,23 @@
 import { truncate, formatDate } from '../shared/utils/textAndDateUtils'
 import Genres from './Genres'
 import MovieRating from './MovieRating'
-import HeartIcon from './icons/HeartIcon'
+import FavoriteMovieButton from './FavoriteMovieButton'
 
 export default {
   components: {
     Genres,
     MovieRating,
-    HeartIcon
+    FavoriteMovieButton
   },
   props: {
     movie: {
       type: Object,
       required: true,
+    }
+  },
+  methods: {
+    makeFavourite () {
+      console.log('movie added to favorite')
     }
   },
   computed: {
@@ -95,6 +100,7 @@ export default {
     }
     &__rate-like {
       display: flex;
+      align-items: center;
       justify-content: space-around;
     }
   }

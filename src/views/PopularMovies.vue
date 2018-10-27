@@ -50,12 +50,9 @@ export default {
     }
   },
   methods: {
-    async getMoviesForCurrentPage () {
-      return this.fetchPopularMovies({ page: this.page })
-    },
     async fetchPopularMovies (page) {
       this.loading = true
-      const [error, response] = await to(this.$store.dispatch('getPopularMovies', { page }))
+      const [error, response] = await to(this.$store.dispatch('getPopularMovies', page))
 
       if (error) throw error
       if (response) {
@@ -67,13 +64,13 @@ export default {
   },
   watch: {
     page (newPage) {
-      this.getMoviesForCurrentPage()
+      this.fetchPopularMovies(newPage)
     }
   },
   async created () {
     await Promise.all([
     this.$store.dispatch('getMoviesGenres'),
-    this.getMoviesForCurrentPage()
+    this.fetchPopularMovies(this.page)
     ])
   }
 }

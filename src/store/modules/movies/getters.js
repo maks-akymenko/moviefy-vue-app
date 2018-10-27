@@ -1,6 +1,9 @@
 const getters = {
-  getGenre: state => genreId => {
-    return state.genresMap[genreId]
+  getGenre (state) {
+    return genreId => state.genresMap[genreId]
+  },
+  isMovieFavorite (state) {
+    return (moviedId) => state.favoriteMoviesId.includes(moviedId)
   }
 }
 

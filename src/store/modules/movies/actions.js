@@ -27,6 +27,9 @@ const actions = {
       commit('SET_MOVIE_GENRES_MAP', normalized.entities.map)
       commit('SET_MOVIE_GENRES_IDS', normalized.result.array)
     }
+  },
+  selectFavoriteMovie ({ commit }, data) {
+    commit('SELECT_FAVORITE_MOVIE', data)
   }
 }
 
