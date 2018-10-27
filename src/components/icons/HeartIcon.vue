@@ -43,6 +43,7 @@ export default {
 <style lang="scss">
   .heart-icon {
     color: #363636;
+    cursor: pointer;
     transition: color 250ms ease-in-out;
     &[data-active] {
       color: #FE5F55;

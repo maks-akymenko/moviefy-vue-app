@@ -3,8 +3,8 @@
     v-bind="$attrs"
     :active="active"
     :title="active
-      ? 'Add to favorites'
-      : 'Remove from favorites'
+      ? 'Remove from favorites'
+      : 'Add to favorites'
     "
     @click="toggleActive"
   ></heart-icon>

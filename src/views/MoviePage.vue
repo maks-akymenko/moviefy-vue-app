@@ -1,29 +1,29 @@
 <template>
   <div class="movie-details" v-if="movie">
-        <div :style="{ 'background-image': `url(${backdropLink})` }" class="movie__background-image"></div>
-        <div class="movie container">
-          <img class="movie__poster" :src="posterPath" :alt="movie.title">
-          <div class="movie__full-info">
-            <h1 class="has-text-white-ter is-size-2 has-text-centered has-text-weight-bold">{{ movie.title }}({{ formattedDate }})</h1>
-            <p v-if="movie.tagline.length > 0" class="is-size-4 has-text-white-ter has-text-centered">"{{ movie.tagline }}"</p>
-            <div class="movie__icons">
-              <heart-icon></heart-icon>
-              <movie-rating
-              :rating="movie.vote_average"
-              :votes-count="movie.vote_count">
-              </movie-rating>
-              <share-icon></share-icon>
-            </div>
-            <h4 class="has-text-white-ter is-size-3 has-text-weight-bold">Overview:</h4>
-            <p class="movie__overview has-text-white-ter is-size-5">
-              {{ movie.overview }}
-            </p>
-          </div>
+    <div :style="{ 'background-image': `url(${backdropLink})` }" class="movie__background-image"></div>
+    <div class="movie container">
+      <img class="movie__poster" :src="posterPath" :alt="movie.title">
+      <div class="movie__full-info">
+        <h1 class="has-text-white-ter is-size-2 has-text-centered has-text-weight-bold">{{ movie.title }}({{ formattedDate }})</h1>
+        <p v-if="movie.tagline.length > 0" class="is-size-4 has-text-white-ter has-text-centered">"{{ movie.tagline }}"</p>
+        <div class="movie__icons">
+          <favorite-movie-button :movieId="movie.id"></favorite-movie-button>
+          <movie-rating
+          :rating="movie.vote_average"
+          :votes-count="movie.vote_count">
+          </movie-rating>
+          <share-icon></share-icon>
         </div>
-        <movie-slider :similar-movies="similarMovies"></movie-slider>
+        <h4 class="has-text-white-ter is-size-3 has-text-weight-bold">Overview:</h4>
+        <p class="movie__overview has-text-white-ter is-size-5">
+          {{ movie.overview }}
+        </p>
+      </div>
+    </div>
+    <movie-slider :similar-movies="similarMovies"></movie-slider>
   </div>
 </template>
-
+  
 <script>
 import to from 'await-to-js';
 import { getMovie, getMovieCredits } from '../services/api'
@@ -35,6 +35,7 @@ import HeartIcon from '../components/icons/HeartIcon'
 import ShareIcon from '../components/icons/ShareIcon'
 import Genres from '../components/Genres'
 import MovieSlider from '../components/MovieSlider'
+import FavoriteMovieButton from '../components/FavoriteMovieButton'
 
 export default {
   name: 'movie',
@@ -44,7 +45,8 @@ export default {
     HeartIcon,
     ShareIcon,
     Genres,
-    MovieSlider
+    MovieSlider,
+    FavoriteMovieButton
   },
   data () {
     return {

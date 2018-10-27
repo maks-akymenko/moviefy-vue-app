@@ -1,18 +1,24 @@
 <template>
-<div>
-  <button 
-    v-if="genres" 
-    class="genre button is-warning is-rounded is-small" 
-    :class="[`genre__size--${size}`]"
-    v-for="genre in getGenres" 
+<div v-if="genres">
+    <genre
+    v-for="genre in getGenres"  
+    :class="{
+      'genre': true,
+      [`genre__size--${size}`]: true
+      }"
+    size="small"
     :key="Math.random() * genre.id">
-    {{ genre.name }}
-  </button>
+      {{ genre.name }}
+    </genre>
 </div>
 </template>
 
 <script>
+import Genre from './Genre'
 export default {
+  components: {
+    Genre
+  },
   props: {
     genres: {
       type: Array,
@@ -34,8 +40,14 @@ export default {
 }
 </script>
 
-<style style="scss ">
+<style lang="scss">
   .genre {
     margin: 0.3rem;
+    &__size--small {
+      // padding: 1rem;
+    }
+    &__size--big {
+      padding: 10rem
+    }
   }
 </style>
