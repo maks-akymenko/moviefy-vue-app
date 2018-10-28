@@ -1,34 +1,45 @@
 <template>
-  <div>
-    <carousel :items="6" :loop="true" :dots="false" v-if="similarMovies" class="movie-slider">
-      <simple-movie-card 
-        v-for="movie in similarMovies" 
-        :movie="movie" 
-        :key="movie.id">
-      </simple-movie-card>
+    <carousel 
+    :perPage="5"
+    class="movies-slider">
+      <slide v-for="movie in similarMovies" :key="movie.id">
+        <router-link :to="movieLink(movie.id)">
+          <img :src="posterPath(movie.poster_path)" :alt="movie.title">
+        </router-link>
+          <h3>{{ movie.title }}</h3>
+      </slide>
     </carousel>
-  </div>
 </template>
 
 <script>
-import Carousel from 'vue-owl-carousel'
-import SimpleMovieCard from './SimpleMovieCard'
+import { Carousel, Slide } from 'vue-carousel';
 export default {
   components: {
-    Carousel,
-    SimpleMovieCard
+    Carousel, 
+    Slide
   },
   props: {
     similarMovies: {
       type: Array, 
       required: true
     }
+  },
+  methods: {
+    movieLink (id) {
+      return {
+        path: `/movies/${id}`
+      }
+    },
+    posterPath (path) {
+      return 'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + path
+    },
   }
 }
 </script>
 
 <style lang="scss">
-  .movie-slider {
-    z-index: 100;
+  .movies-slider {
+    &__movie {
+    }
   }
 </style>

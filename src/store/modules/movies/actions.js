@@ -1,4 +1,10 @@
-import { getPopularMovies, getMoviesGenres, getSimilarMovies } from '../../../services/api'
+import { 
+  getPopularMovies,
+  getMoviesGenres,
+  getMovie,
+  getSimilarMovies,
+  getMovieVideo
+} from '../../../services/api'
 import { normalizeArray } from '../../utils'
 import to from 'await-to-js'
 
@@ -14,7 +20,16 @@ const actions = {
     if (error) throw error
     if (response) return response.data
   },
-
+  async getMovie ({ commit }, id) {
+    const [error, response] = await to(getMovie(id))
+    if (error) throw error
+    if (response) return response.data
+  },
+  async getMovieVideo ({ commit }, id) {
+    const [error, response] = await to(getMovieVideo(id))
+    if (error) throw error
+    if (response) return response.data
+  },
   async getMoviesGenres ({ commit }) {
     const [error, response] = await to(getMoviesGenres())
 

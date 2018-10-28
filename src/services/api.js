@@ -29,3 +29,7 @@ export function getMoviesGenres () {
 export function getSimilarMovies (movieId) {
   return axiosMovieDB(`3/movie/${movieId}/similar`)
 }
+
+export function getMovieVideo (movieId) {
+  return axiosMovieDB(`3/movie/${movieId}/videos`)
+}

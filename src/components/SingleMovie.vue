@@ -19,7 +19,6 @@
           ></movie-rating>
         </div>
         <div class="single-movie__genres" >
-          <genres v-if="movie.genre_ids" size="small" :genres="movie.genre_ids"></genres>
         </div>
       </div>
   </div>
@@ -27,13 +26,11 @@
 
 <script>
 import { truncate, formatDate } from '../shared/utils/textAndDateUtils'
-import Genres from './Genres'
 import MovieRating from './MovieRating'
 import FavoriteMovieButton from './FavoriteMovieButton'
 
 export default {
   components: {
-    Genres,
     MovieRating,
     FavoriteMovieButton
   },
@@ -41,11 +38,6 @@ export default {
     movie: {
       type: Object,
       required: true,
-    }
-  },
-  methods: {
-    makeFavourite () {
-      console.log('movie added to favorite')
     }
   },
   computed: {
