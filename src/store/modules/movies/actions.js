@@ -14,7 +14,6 @@ const actions = {
     if (error) throw error
     if (response) return response.data
   },
-
   async getSimilarMovies ({ commit }, id) {
     const [error, response] = await to(getSimilarMovies(id))
     if (error) throw error

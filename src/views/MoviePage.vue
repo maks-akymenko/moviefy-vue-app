@@ -4,6 +4,7 @@
     <div class="movie-details__container">
       <div>
         <iframe 
+        class="movie-details__trailer"
         v-if="movieVideo" 
         :src="trailerPath" 
         width="580" 
@@ -32,16 +33,34 @@
         <p class="movie-details__overview has-text-white-ter is-size-5">
           {{ movie.overview }}
         </p>
-      </div>  
+      </div> 
+      <aside class="movie-details__sidebar">
+         <div class="title is-size-4 has-text-white-ter"><span>Status:</span> {{ movie.status }}</div> 
+         <div class="title is-size-4 has-text-white-ter"><span>Release date:</span> {{ reversedDate }}</div>
+         <div class="title is-size-4 has-text-white-ter"><span>Runtime:</span> {{ convertedTime }}</div>
+         <div v-if="movie.budget > 0" class="title is-size-4 has-text-white-ter"><span>Budget:</span> {{ convertAmounts(movie.budget) }}</div>
+         <div v-if="movie.revenue > 0" class="title is-size-4 has-text-white-ter"><span>Revenue:</span> {{ convertAmounts(movie.revenue) }}</div>
+      </aside> 
     </div>
+    <h4 class="movie-details__recommendations title has-text-centered has-text-weight-bold has-text-white-bis">We also recommend</h4>
     <movie-slider class="movie-details__slider" v-if="similarMovies" :similar-movies="similarMovies"></movie-slider>
   </div>
 </template>
   
 <script>
 import to from 'await-to-js';
-import { getMovie, getMovieCredits } from '../services/api'
-import { formatDate } from '../shared/utils/textAndDateUtils'
+import { 
+  getMovie, 
+  getMovieCredits 
+} 
+from '../services/api'
+import { 
+  formatDate, 
+  convertTime, 
+  reverseDate, 
+  numberWithCommas
+} 
+from '../shared/utils/textAndDateUtils'
 
 import Heading from '../components/Heading'
 import MovieRating from '../components/MovieRating'
@@ -64,6 +83,7 @@ export default {
     return {
       movie: null,
       movieVideo: null,
+      movieCredits: null,
       similarMovies: []
     }
   },
@@ -72,6 +92,7 @@ export default {
     const [error, response] = await to(this.$store.dispatch('getMovie', id))
       if (error) throw error
       if (response) this.movie = response
+      console.log(this.movie)
   },
   async fetchMovieVideo (id) {
     const [error, response] = await to(this.$store.dispatch('getMovieVideo', id))
@@ -84,16 +105,25 @@ export default {
 
       if (error) throw error
       if (response) this.similarMovies = response.results
-    }
+    },
+    convertAmounts (amount) {
+      return numberWithCommas(amount)
+    },
   },
   async created () {
     await Promise.all([
       this.fetchMovie(this.$route.params.id),
       this.fetchMovieVideo(this.$route.params.id),
-      this.fetchSimilarMovies(this.$route.params.id)
+      this.fetchSimilarMovies(this.$route.params.id),
     ])
   },
   computed: {
+    reversedDate () {
+      return reverseDate(this.movie.release_date)
+    },
+    convertedTime () {
+      return convertTime(this.movie.runtime)
+    },
     getGenresId () {
       return this.movie.genres.map(genre => genre.id)
     },
@@ -132,7 +162,6 @@ export default {
     z-index: 1;
     padding: 5rem;
     position: relative;
-    height: 100vh;
       &__bg-image {
       position: absolute;
       z-index: -1;
@@ -165,6 +194,16 @@ export default {
       }
       &__full-info {
         padding: 0 5rem;
+        flex: 2;
+      }
+      &__trailer {
+        flex: 2;
+      }
+      &__sidebar {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-around;
       }
       &__poster {
         border-radius: $border-radius;
@@ -177,6 +216,9 @@ export default {
       }
       &__slider {
         z-index: 1;
+      }
+      &__recommendations {
+        padding: 3rem 0;
       }
     }
 </style>

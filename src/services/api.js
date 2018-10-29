@@ -17,10 +17,10 @@ export function getPopularMovies (params) {
 export function getMovie (movieId) {
   return axiosMovieDB(`3/movie/${movieId}`)
 }
-
-export function getMovieCredits (movieId) {
-  return axiosMovieDB(`3/movie/${movieId}/credits`)
-}
+// For later
+// export function getMovieCredits (movieId) {
+//   return axiosMovieDB(`3/movie/${movieId}/credits`)
+// }
 
 export function getMoviesGenres () {
   return axiosMovieDB('3/genre/movie/list')
