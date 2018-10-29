@@ -14,7 +14,7 @@
             ? 'is-3'
             : 'is-6' 
           "
-        >{{ rating || 'No rating' }}</span>
+        >{{ rating || 'No rating yet' }}</span>
         <span v-if="ratingExist">/10</span>
       </span>
       <span class="movie-rating__total-votes" v-if="ratingExist">

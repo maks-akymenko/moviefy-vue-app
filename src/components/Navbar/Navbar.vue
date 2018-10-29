@@ -5,7 +5,6 @@
     </logo>
     <div class="is-flex">
       <search-bar></search-bar>
-      <log-button>Log in</log-button>
     </div>
   </div>  
 </template>

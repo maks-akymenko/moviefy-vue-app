@@ -33,3 +33,9 @@ export function getSimilarMovies (movieId) {
 export function getMovieVideo (movieId) {
   return axiosMovieDB(`3/movie/${movieId}/videos`)
 }
+
+export function getMovieSearchResults (params) {
+  return axiosMovieDB('3/search/movie', {
+    params
+  })
+}

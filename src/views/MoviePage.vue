@@ -37,9 +37,9 @@
       <aside class="movie-details__sidebar">
          <div class="title is-size-4 has-text-white-ter"><span>Status:</span> {{ movie.status }}</div> 
          <div class="title is-size-4 has-text-white-ter"><span>Release date:</span> {{ reversedDate }}</div>
-         <div class="title is-size-4 has-text-white-ter"><span>Runtime:</span> {{ convertedTime }}</div>
-         <div v-if="movie.budget > 0" class="title is-size-4 has-text-white-ter"><span>Budget:</span> {{ convertAmounts(movie.budget) }}</div>
-         <div v-if="movie.revenue > 0" class="title is-size-4 has-text-white-ter"><span>Revenue:</span> {{ convertAmounts(movie.revenue) }}</div>
+         <div v-if="movie.runtime" class="title is-size-4 has-text-white-ter"><span>Runtime:</span> {{ convertedTime }}</div>
+         <div v-if="movie.budget" class="title is-size-4 has-text-white-ter"><span>Budget:</span> {{ convertAmounts(movie.budget) }}</div>
+         <div v-if="movie.revenue" class="title is-size-4 has-text-white-ter"><span>Revenue:</span> {{ convertAmounts(movie.revenue) }}</div>
       </aside> 
     </div>
     <h4 class="movie-details__recommendations title has-text-centered has-text-weight-bold has-text-white-bis">We also recommend</h4>
