@@ -5,8 +5,8 @@
 
       <pagination :current-page="page" :total-pages="totalPages" route-name="popular-movies"></pagination>
   
-      <div class="columns is-multiline popular-movies__results" >
-        <div type="cards" v-show="loading">Loading...</div>
+      <div class="columns is-multiline popular-movies__results" data-loader-target >
+        <loader type="cards" v-show="loading"></loader>
 
         <div
         class="column is-12 is-half-desktop is-half-fullhd"
@@ -22,19 +22,20 @@
 </template>
 
 <script>
+import{ getPopularMovies } from '../services/api'
+import to from 'await-to-js';
 import SingleMovie from '../components/SingleMovie'
 import Pagination from '../components/Pagination'
 import Heading from '../components/Heading'
-import{ getPopularMovies } from '../services/api'
-
-import to from 'await-to-js';
+import Loader from '../components/Loader'
 
 export default {
   name: 'popular-movies',
   components: {
     SingleMovie,
     Pagination,
-    Heading
+    Heading,
+    Loader
   },
   props: {
     page: {

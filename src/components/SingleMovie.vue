@@ -3,24 +3,29 @@
 
     <router-link :to="movieLink">
       <img class="single-movie__poster" :src="posterPath" :alt="movie.title">
-      </router-link>
+    </router-link>
 
       <div class="single-movie__info">
-
-        <router-link :to="movieLink">
+      <router-link :to="movieLink">
         <h2 class="single-movie__title title is-size-5 has-text-white-ter">{{ movie.title }}({{ formattedDate }})</h2>
-        </router-link>
-        <p class="has-text-white-ter">{{ shortDescription }}</p>
-        <div class="single-movie__rate-like">
-          <favorite-movie-button :movieId="movie.id"></favorite-movie-button>
-          <movie-rating
-            :rating="movie.vote_average"
-            :votes-count="movie.vote_count"
-          ></movie-rating>
-        </div>
-        <div class="single-movie__genres" >
+      </router-link>
+      <p class="has-text-white-ter">{{ shortDescription }}</p>
+      <div class="single-movie__rate-like">
+        <favorite-movie-button :movieId="movie.id"></favorite-movie-button>
+        <movie-rating
+          :rating="movie.vote_average"
+          :votes-count="movie.vote_count">
+        </movie-rating>
+      </div>
+      <div class="single-movie__genres">
+        <div v-for="genre in getGenreNameFromId" :key="genre.id">
+          <router-link :to="`/movies/${genre.name}`">
+            {{ genre.name }}
+          </router-link>
         </div>
       </div>
+    </div>
+
   </div>
 </template>
 
@@ -41,6 +46,9 @@ export default {
     }
   },
   computed: {
+    getGenreNameFromId () {
+      return this.movie.genre_ids.map(genre => this.$store.getters.getGenre(genre))
+    },
     movieLink () {
       return {
         path: `/movies/${this.movie.id}`
@@ -52,6 +60,7 @@ export default {
         : ''
     },
     posterPath () {
+      console.log(this.movie)
       return this.movie.poster_path 
         ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + this.movie.poster_path
         : ''
@@ -71,10 +80,10 @@ export default {
     border-radius: $border-radius;
     display: flex;
     min-height: 350px;
-    // transition: transform 0.33s;
-    // &:hover {
-    //   transform: rotateZ(-2deg);
-    // }
+    transition: transform 0.33s;
+    &:hover {
+      transform: rotateZ(-1deg);
+    }
     &__poster {
       border-radius: $border-radius;
     }

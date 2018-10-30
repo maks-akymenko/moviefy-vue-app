@@ -16,18 +16,21 @@
       </dropdown-item>
       <dropdown-item
       v-else-if="loading"
-      custom class="app-search__info">
+      custom class="app-search__info"
+      >
       We are searching for the movies...
       </dropdown-item>
-    <dropdown-item
+      <dropdown-item
       v-else-if="searchInput === ''"
-      custom class="app-search__info">
+      custom class="app-search__info"
+      >
       Type something to see results
       </dropdown-item>
 
     <dropdown-item
       v-else-if="!searchResults || !searchResults.length"
-      custom class="app-search__info">
+      custom class="app-search__info"
+      >
       We could not find anything :(
     </dropdown-item>
     <template v-else-if="searchResults">
@@ -50,8 +53,8 @@
 </template>
 
 <script>
-import { Dropdown, DropdownItem } from 'buefy/dist/components/dropdown'
 import to from 'await-to-js';
+import { Dropdown, DropdownItem } from 'buefy/dist/components/dropdown'
 
 export default {
   components: {
@@ -85,8 +88,8 @@ export default {
         this.searchResults = []
         }
       },
-    moviePath (path) {
-      return `/movies/${path}`
+    moviePath (id) {
+      return `/movies/${id}`
       }
     },
     watch: {

@@ -92,7 +92,6 @@ export default {
     const [error, response] = await to(this.$store.dispatch('getMovie', id))
       if (error) throw error
       if (response) this.movie = response
-      console.log(this.movie)
   },
   async fetchMovieVideo (id) {
     const [error, response] = await to(this.$store.dispatch('getMovieVideo', id))
@@ -186,7 +185,7 @@ export default {
           right: 0;
           bottom: 0;
           background-color: #2D2D2D;
-          opacity: 0.3;
+          opacity: 0.4;
         }
       }
       &__container {
