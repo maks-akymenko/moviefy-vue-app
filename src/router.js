@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 import PopularMovies from './views/PopularMovies'
-// eslint-disable-next-line
-import MoviePage from './views/MoviePage'
 
 Vue.use(Router)
 
@@ -38,6 +37,16 @@ export default new Router({
       path: '/movies/:id',
       name: 'movie',
       component: () => import(/* webpackChunkName: "movie" */ './views/MoviePage.vue')
+    },
+    {
+      path: '/movies/genres/:genre',
+      name: 'searched-movies',
+      component: () => import(/* webpackChunkName: "movie-search" */ './views/SearchedMovies.vue'),
+      props: route => {
+        return {
+          page: Number(route.query.page || 1)
+        }
+      }
     }
   ]
 })

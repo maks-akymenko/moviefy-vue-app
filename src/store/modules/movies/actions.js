@@ -4,7 +4,8 @@ import {
   getMovie,
   getSimilarMovies,
   getMovieVideo,
-  getMovieSearchResults
+  getMovieSearchResults,
+  getSimilarGenres
 } from '../../../services/api'
 import { normalizeArray } from '../../utils'
 import to from 'await-to-js'
@@ -22,6 +23,12 @@ const actions = {
   },
   async getSimilarMovies ({ commit }, id) {
     const [error, response] = await to(getSimilarMovies(id))
+    if (error) throw error
+    if (response) return response.data
+  },
+  async getSimilarGenres ({ commit }, payload) {
+    console.log(payload)
+    const [error, response] = await to(getSimilarGenres(id, name))
     if (error) throw error
     if (response) return response.data
   },

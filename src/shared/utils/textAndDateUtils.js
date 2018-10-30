@@ -29,3 +29,7 @@ export function numberWithCommas (amount) {
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   return `$${parts.join('.')}`
 }
+
+export function kebabCaseTransformer (str) {
+  return str.split(' ').map(word => word.toLowerCase()).join('-')
+}

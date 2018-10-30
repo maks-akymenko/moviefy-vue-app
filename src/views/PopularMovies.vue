@@ -1,41 +1,27 @@
 <template>
   <div class="popular-movies section">
     <section class="container is-fluid">
-      <heading>Popular movies</heading>
-
-      <pagination :current-page="page" :total-pages="totalPages" route-name="popular-movies"></pagination>
-  
-      <div class="columns is-multiline popular-movies__results" data-loader-target >
-        <loader type="cards" v-show="loading"></loader>
-
-        <div
-        class="column is-12 is-half-desktop is-half-fullhd"
-        v-for="movie in movies"
-        :key="movie.id">
-
-          <single-movie :movie="movie" />
-        </div>
-      </div>
-      <pagination :current-page="page" :total-pages="totalPages" route-name="popular-movies"></pagination>
+        <movies 
+        :results="popularMovies" 
+        title="Popular movies"
+        :page="page"
+        :total-pages="totalPages"
+        :loading="loading"
+        pagination-route-name="popular-movies"
+        >
+        </movies>
     </section>
   </div>
 </template>
 
 <script>
-import{ getPopularMovies } from '../services/api'
 import to from 'await-to-js';
-import SingleMovie from '../components/SingleMovie'
-import Pagination from '../components/Pagination'
-import Heading from '../components/Heading'
-import Loader from '../components/Loader'
+import Movies from './Movies'
 
 export default {
   name: 'popular-movies',
   components: {
-    SingleMovie,
-    Pagination,
-    Heading,
-    Loader
+    Movies
   },
   props: {
     page: {
@@ -45,9 +31,9 @@ export default {
   },
   data () {
     return {
-      movies: [],
+      popularMovies: [],
       loading: false,
-      totalPages: 0
+      totalPages: Number.POSITIVE_INFINITY
     }
   },
   methods: {
@@ -57,7 +43,7 @@ export default {
 
       if (error) throw error
       if (response) {
-        this.movies = response.results
+        this.popularMovies = response.results
         this.totalPages = response.total_pages
       }
       this.loading = false

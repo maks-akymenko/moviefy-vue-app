@@ -18,8 +18,8 @@
         </movie-rating>
       </div>
       <div class="single-movie__genres">
-        <div v-for="genre in getGenreNameFromId" :key="genre.id">
-          <router-link :to="`/movies/${genre.name}`">
+        <div class="single-movie__genre" v-for="genre in getGenreNameFromId" :key="genre.id">
+          <router-link class="button is-rounded is-warning is-small" :to="createGenreRoute(genre)">
             {{ genre.name }}
           </router-link>
         </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { truncate, formatDate } from '../shared/utils/textAndDateUtils'
+import { truncate, formatDate, kebabCaseTransformer } from '../shared/utils/textAndDateUtils'
 import MovieRating from './MovieRating'
 import FavoriteMovieButton from './FavoriteMovieButton'
 
@@ -60,7 +60,6 @@ export default {
         : ''
     },
     posterPath () {
-      console.log(this.movie)
       return this.movie.poster_path 
         ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + this.movie.poster_path
         : ''
@@ -69,6 +68,16 @@ export default {
       return truncate(this.movie.overview || '', 180)
     },
   },
+  methods: {
+    createGenreRoute (genre) {
+      return {
+        path: `/movies/genres/${kebabCaseTransformer(genre.name)}`,
+        query: {
+          genreId: genre.id
+        }
+      }
+    },
+  }
 }
 </script>
 
@@ -104,5 +113,10 @@ export default {
       align-items: center;
       justify-content: space-around;
     }
+    &__genre {
+      a {
+        
+      }
+    } 
   }
 </style>
