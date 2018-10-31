@@ -17,13 +17,6 @@
           :votes-count="movie.vote_count">
         </movie-rating>
       </div>
-      <div class="single-movie__genres">
-        <div class="single-movie__genre" v-for="genre in getGenreNameFromId" :key="genre.id">
-          <router-link class="button is-rounded is-warning is-small" :to="createGenreRoute(genre)">
-            {{ genre.name }}
-          </router-link>
-        </div>
-      </div>
     </div>
 
   </div>

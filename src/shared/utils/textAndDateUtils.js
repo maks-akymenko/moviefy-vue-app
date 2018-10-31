@@ -33,3 +33,16 @@ export function numberWithCommas (amount) {
 export function kebabCaseTransformer (str) {
   return str.split(' ').map(word => word.toLowerCase()).join('-')
 }
+
+export function trim (str, char) {
+  if (char === ']') char = '\\]'
+  if (char === '\\') char = '\\\\'
+
+  return str.replace(new RegExp(
+    '^[' + char + ']+|[' + char + ']+$', 'g'
+  ), '')
+}
+
+export function removeRepeatedCommas (str = '') {
+  return trim(str.replace(/,+/g, ','), ',')
+}

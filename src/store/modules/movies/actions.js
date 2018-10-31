@@ -26,8 +26,8 @@ const actions = {
     if (error) throw error
     if (response) return response.data
   },
-  async getSimilarGenres ({ commit }, payload) {
-    console.log(payload)
+  async getSimilarGenres ({ commit }, { id, name }) {
+    console.log(id, name)
     const [error, response] = await to(getSimilarGenres(id, name))
     if (error) throw error
     if (response) return response.data

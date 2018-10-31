@@ -3,7 +3,10 @@
     <logo size="medium" path="/">
       Moviefy
     </logo>
-    <div class="is-flex">
+    <div class="header__right">
+      <router-link tag="button" to="/favorite" class="button is-warning is-rounded">
+        Favorite Movies
+      </router-link>
       <search-bar></search-bar>
     </div>
   </div>  
@@ -23,11 +26,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .header {
     padding: 30px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &__right {
+      display: flex;
+      align-items: center;
+    }
   }
 </style>

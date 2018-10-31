@@ -22,6 +22,9 @@ export default {
 </script>
 
 <style lang="scss">
+  #app {
+    min-height: 100vh;
+  }
   .fade-enter-active, .fade-leave-active {
     transition-property: opacity;
     transition-duration: .25s;

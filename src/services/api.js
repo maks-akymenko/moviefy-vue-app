@@ -40,6 +40,6 @@ export function getMovieSearchResults (params) {
   })
 }
 
-export function getSimilarGenres (genreId, genreName) {
-  return axiosMovieDB(`3/genre/${genreId}-${genreName}/movie`)
-}
+// export function getSimilarGenres (genreId, genreName) {
+//   return axiosMovieDB(`3/genre/${genreId}-${genreName}/movie`)
+// }

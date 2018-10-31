@@ -3,7 +3,7 @@
     <section class="container is-fluid">
       <heading>{{ title }}</heading>
 
-      <pagination :current-page="page" :total-pages="totalPages" :route-name="paginationRouteName"></pagination>
+      <pagination v-if="pagination" :current-page="page" :total-pages="totalPages" :route-name="paginationRouteName"></pagination>
   
       <div class="columns is-multiline popular-movies__results" data-loader-target >
         <loader type="cards" v-show="loading"></loader>
@@ -16,7 +16,7 @@
           <single-movie :movie="movie" />
         </div>
       </div>
-      <pagination :current-page="page" :total-pages="totalPages" :route-name="paginationRouteName"></pagination>
+      <pagination v-if="pagination" :current-page="page" :total-pages="totalPages" :route-name="paginationRouteName"></pagination>
     </section>
   </div>
 </template>
@@ -42,6 +42,10 @@ export default {
       type: String,
       required: true
     },
+    pagination: {
+      type: Boolean,
+      default: true
+    },
     results: {
       type: Array,
       required: true
@@ -56,7 +60,6 @@ export default {
     },
     paginationRouteName: {
       type: String,
-      required: true
     },
     loading: {
       type: Boolean,

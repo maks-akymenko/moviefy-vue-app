@@ -41,10 +41,15 @@ export default new Router({
     {
       path: '/movies/genres/:genre',
       name: 'searched-movies',
-      component: () => import(/* webpackChunkName: "movie-search" */ './views/SearchedMovies.vue'),
+      component: () => import(/* webpackChunkName: "movie-search" */ './views/SearchedMovies.vue')
+    },
+    {
+      path: '/favorite',
+      name: 'favorite-movies',
+      component: () => import(/* webpackChunkName: "movie-search" */ './views/FavoriteMovies.vue'),
       props: route => {
-        return {
-          page: Number(route.query.page || 1)
+        return  {
+          favoriteMovies: store.getters.getFavoriteMovies
         }
       }
     }
