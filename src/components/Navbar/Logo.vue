@@ -33,6 +33,8 @@ export default {
 </script>
 
 <style lang="scss">
+  $border: 15px;
+  
   .logo {
     z-index: 10;
     a {
@@ -40,7 +42,7 @@ export default {
       text-decoration: none;
       padding: 5px 10px;
       border: 1px solid hsl(48, 100%, 67%);
-      border-radius: 10px;
+      border-radius: $border;
       color: hsl(48, 100%, 67%);
       transition: color 0.3s;
       &:hover {

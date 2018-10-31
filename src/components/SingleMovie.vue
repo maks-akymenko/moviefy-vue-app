@@ -5,17 +5,17 @@
       <img class="single-movie__poster" :src="posterPath" :alt="movie.title">
     </router-link>
 
-      <div class="single-movie__info">
+    <div class="single-movie__info">
       <router-link :to="movieLink">
-        <h2 class="single-movie__title title is-size-5 has-text-white-ter">{{ movie.title }}({{ formattedDate }})</h2>
+        <h2 class="single-movie__title title is-size-2 has-text-white-ter">{{ movie.title }}({{ formattedDate }})</h2>
       </router-link>
       <p class="has-text-white-ter">{{ shortDescription }}</p>
       <div class="single-movie__rate-like">
-        <favorite-movie-button :movieId="movie.id"></favorite-movie-button>
-        <movie-rating
-          :rating="movie.vote_average"
-          :votes-count="movie.vote_count">
-        </movie-rating>
+      <favorite-movie-button :movieId="movie.id"></favorite-movie-button>
+      <movie-rating
+        :rating="movie.vote_average"
+        :votes-count="movie.vote_count">
+      </movie-rating>
       </div>
     </div>
 
@@ -60,16 +60,6 @@ export default {
     shortDescription () {
       return truncate(this.movie.overview || '', 180)
     },
-  },
-  methods: {
-    createGenreRoute (genre) {
-      return {
-        path: `/movies/genres/${kebabCaseTransformer(genre.name)}`,
-        query: {
-          genreId: genre.id
-        }
-      }
-    },
   }
 }
 </script>
@@ -78,7 +68,6 @@ export default {
   $border-radius: 15px;
 
   .single-movie {
-    padding: 10px;
     border-radius: $border-radius;
     display: flex;
     min-height: 350px;
@@ -87,13 +76,16 @@ export default {
       transform: rotateZ(-1deg);
     }
     &__poster {
-      border-radius: $border-radius;
+      border-radius: $border-radius;  
+
+      height: 100%;
     }
     &__title {
       margin: 1.5rem 0;
     }
     &__info {
       width: 50%;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -105,6 +97,6 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-around;
-      }
-    } 
+    }
+  } 
 </style>

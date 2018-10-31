@@ -42,15 +42,17 @@ export default {
   methods: {
     fetchMoviesFromId () {
       if (this.favoriteMovies.length > 0) {
-      this.loading = true
-      this.favoriteMovies.map(movie => {
-          this.$store.dispatch('getMovie', movie)
+        this.loading = true
+        this.favoriteMovies.map(movie => {
+          this.$store
+            .dispatch('getMovie', movie)
             .then((result) => {
               this.favoriteMoviesList.push(result)
               this.loading = false
-            }).catch((err) => {
+            })
+            .catch((err) => {
               throw err
-            });
+          });
         })
       }
     }
@@ -62,9 +64,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  .favorite-movies {
-    min-height: 100vh;
-  }
-</style>

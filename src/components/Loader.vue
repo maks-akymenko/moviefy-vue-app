@@ -61,11 +61,4 @@ export default  {
     margin-top: 11rem;
   }
 }
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 200ms ease-in-out;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
 </style>

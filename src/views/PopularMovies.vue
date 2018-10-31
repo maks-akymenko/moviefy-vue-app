@@ -1,6 +1,7 @@
 <template>
   <div class="popular-movies section">
     <section class="container is-fluid">
+
         <movies 
         :results="popularMovies" 
         title="Popular movies"
@@ -10,6 +11,7 @@
         pagination-route-name="popular-movies"
         >
         </movies>
+        
     </section>
   </div>
 </template>
@@ -64,5 +66,5 @@ export default {
 </script>
 
 <style lang="scss">
-
+  
 </style>

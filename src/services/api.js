@@ -1,6 +1,5 @@
 import axios from 'axios'
 import * as constants from '../shared/constants'
-
 const axiosMovieDB = axios.create({
   baseURL: constants.BASE_URL,
   params: {
@@ -39,7 +38,3 @@ export function getMovieSearchResults (params) {
     params
   })
 }
-
-// export function getSimilarGenres (genreId, genreName) {
-//   return axiosMovieDB(`3/genre/${genreId}-${genreName}/movie`)
-// }

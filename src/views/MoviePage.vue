@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-details" v-if="movie">
+  <div v-if="movie" class="movie-details">
     <div class="movie-details__bg-image" :style="{ 'background-image': `url(${backdropLink})` }"></div>
     <div class="movie-details__container">
       <div>
@@ -16,16 +16,28 @@
         v-else 
         class="movie__poster" 
         :src="posterPath" 
-        :alt="movie.title">
+        :alt="movie.title"
+        >
       </div>
       <div class="movie-details__full-info">
-        <h1 class="has-text-white-ter is-size-2 has-text-centered has-text-weight-bold">{{ movie.title }}({{ formattedDate }})</h1>
-        <p v-if="movie.tagline.length > 0" class="is-size-4 has-text-white-ter has-text-centered">"{{ movie.tagline }}"</p>
+        <h1 class="
+          has-text-white-ter 
+          is-size-2 
+          has-text-centered 
+          has-text-weight-bold"
+          >
+          {{ movie.title }}({{ formattedDate }})
+        </h1>
+        <p 
+          v-if="movie.tagline.length > 0" 
+          class="is-size-4 has-text-white-ter has-text-centered">
+          "{{ movie.tagline }}"
+        </p>
         <div class="movie-details__icons">
           <favorite-movie-button :movieId="movie.id"></favorite-movie-button>
           <movie-rating
-          :rating="movie.vote_average"
-          :votes-count="movie.vote_count">
+            :rating="movie.vote_average"
+            :votes-count="movie.vote_count">
           </movie-rating>
           <share-icon></share-icon>
         </div>
@@ -35,15 +47,49 @@
         </p>
       </div> 
       <aside class="movie-details__sidebar">
-         <div class="title is-size-4 has-text-white-ter"><span>Status:</span> {{ movie.status }}</div> 
-         <div class="title is-size-4 has-text-white-ter"><span>Release date:</span> {{ reversedDate }}</div>
-         <div v-if="movie.runtime" class="title is-size-4 has-text-white-ter"><span>Runtime:</span> {{ convertedTime }}</div>
-         <div v-if="movie.budget" class="title is-size-4 has-text-white-ter"><span>Budget:</span> {{ convertAmounts(movie.budget) }}</div>
-         <div v-if="movie.revenue" class="title is-size-4 has-text-white-ter"><span>Revenue:</span> {{ convertAmounts(movie.revenue) }}</div>
+         <div class="title is-size-4 has-text-white-ter">
+           <span>Status:</span> 
+            {{ movie.status }}
+          </div> 
+         <div class="title is-size-4 has-text-white-ter">
+           <span>Release date:</span> 
+           {{ reversedDate }}
+          </div>
+         <div 
+          v-if="movie.runtime" 
+          class="title is-size-4 has-text-white-ter">
+            <span>Runtime:</span> 
+            {{ convertedTime }}
+         </div>
+         <div 
+          v-if="movie.budget" 
+          class="title is-size-4 has-text-white-ter">
+            <span>Budget:</span> 
+            {{ convertAmounts(movie.budget) }}
+         </div>
+         <div 
+          v-if="movie.revenue" 
+          class="title is-size-4 has-text-white-ter">
+            <span>Revenue:</span> 
+            {{ convertAmounts(movie.revenue) }}
+         </div>
       </aside> 
     </div>
-    <h4 class="movie-details__recommendations title has-text-centered has-text-weight-bold has-text-white-bis">We also recommend</h4>
-    <movie-slider class="movie-details__slider" v-if="similarMovies" :similar-movies="similarMovies"></movie-slider>
+    <h4 class="
+      movie-details__recommendations 
+      title 
+      has-text-centered 
+      has-text-weight-bold 
+      has-text-white-bis"
+    >
+    We also recommend
+    </h4>
+    <movie-slider 
+    class="movie-details__slider" 
+    v-if="similarMovies" 
+    :similar-movies="similarMovies"
+    >
+    </movie-slider>
   </div>
 </template>
   

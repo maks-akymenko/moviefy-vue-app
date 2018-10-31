@@ -18,7 +18,7 @@
         <span v-if="ratingExist">/10</span>
       </span>
       <span class="movie-rating__total-votes" v-if="ratingExist">
-        {{ votesCount }} votes
+        {{ votesCount }}
       </span>
     </div>
   </div>

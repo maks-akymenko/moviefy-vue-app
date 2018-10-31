@@ -4,17 +4,25 @@
       tag="button"
       :disabled="!previousPageExists"
       :to="{ name: routeName, query: previousPageQuery }" 
-      class="button is-warning is-rounded is-medium">Previous page</router-link>
+      class="button is-warning is-rounded is-medium">Previous page
+    </router-link>
 
     <span class="pagination__results">
-      Page <span class="title is-4 has-text-white-ter">{{ currentPage }}</span> out of <span class="title is-4 has-text-white-ter">{{ totalPages }}</span>
+      Page
+      <span class="title is-2 has-text-white-ter">
+        {{ currentPage }}
+      </span>out of 
+      <span class="title is-2 has-text-white-ter">
+        {{ totalPages }}
+      </span>
     </span>
 
     <router-link
       tag="button"
       :disabled="!nextPageExists"
       :to="{ name: routeName, query: nextPageQuery }" 
-      class="button is-warning is-rounded is-medium">Next page</router-link>
+      class="button is-warning is-rounded is-medium">Next page
+    </router-link>
   </div>
 </template>
 

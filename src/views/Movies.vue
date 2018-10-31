@@ -1,7 +1,7 @@
 <template>
   <div class="section">
     <section class="container is-fluid">
-      <heading>{{ title }}</heading>
+      <heading :class="{'extra-padding' : !pagination }">{{ title }}</heading>
 
       <pagination v-if="pagination" :current-page="page" :total-pages="totalPages" :route-name="paginationRouteName"></pagination>
   
@@ -69,6 +69,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style> 
+  .extra-padding {
+    padding-bottom: 5rem;
+  }
 </style>

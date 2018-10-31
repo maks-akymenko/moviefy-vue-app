@@ -1,12 +1,13 @@
 <template>
     <carousel 
     :perPage="8"
-    class="movies-slider">
-      <slide class="movies-slider__movie" v-for="movie in similarMovies" :key="movie.id">
+    class="movies-slider"
+    >
+      <slide class="movies-slider__movie-card" v-for="movie in similarMovies" :key="movie.id">
         <router-link :to="movieLink(movie.id)">
           <img :src="posterPath(movie.poster_path)" :alt="movie.title">
         </router-link>
-          <h3 class="movies-slider__movie-title">{{ movie.title }}</h3>
+          <h3 class="movies-slider__movie-title has-text-white-ter has-text-centered">{{ movie.title }}</h3>
       </slide>
     </carousel>
 </template>
@@ -39,12 +40,8 @@ export default {
 
 <style lang="scss">
   .movies-slider {
-    &__movie {
-      padding: 1rem 2.5rem 0 2.5rem;
-    }
-    &__movie-title {
-      text-align: center;
-      color: whitesmoke;
+    &__movie-card {
+      padding: 1rem 2rem 0 2rem;
     }
   }
 </style>
