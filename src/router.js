@@ -48,7 +48,7 @@ export default new Router({
       name: 'favorite-movies',
       component: () => import(/* webpackChunkName: "movie-search" */ './views/FavoriteMovies.vue'),
       props: route => {
-        return  {
+        return {
           favoriteMovies: store.getters.getFavoriteMovies
         }
       }
