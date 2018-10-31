@@ -5,8 +5,7 @@ import PopularMovies from './views/PopularMovies'
 
 Vue.use(Router)
 
-export default new Router({
-  mode: 'history',
+const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
@@ -17,6 +16,9 @@ export default new Router({
       path: '/movies',
       name: 'popular-movies',
       component: PopularMovies,
+      meta: {
+        title: 'Moviefy - Popular'
+      },
       beforeEnter (to, from, next) {
         if (to.query.page < 1) {
           next({
@@ -47,6 +49,9 @@ export default new Router({
       path: '/favorite',
       name: 'favorite-movies',
       component: () => import(/* webpackChunkName: "movie-search" */ './views/FavoriteMovies.vue'),
+      meta: {
+        title: 'Moviefy - Favorite'
+      },
       props: route => {
         return {
           favoriteMovies: store.getters.getFavoriteMovies
@@ -55,3 +60,10 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  next()
+})
+
+export default router
