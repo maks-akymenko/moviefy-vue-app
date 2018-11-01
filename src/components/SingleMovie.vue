@@ -7,10 +7,10 @@
 
     <div class="single-movie__info">
       <router-link :to="movieLink">
-        <h2 class="single-movie__title title is-size-2 has-text-white-ter">{{ movie.title }}({{ formattedDate }})</h2>
+        <h2 class="single-movie__title title is-size-2 is-size-5-mobile has-text-white-ter">{{ movie.title }}({{ formattedDate }})</h2>
       </router-link>
 
-      <div class="single-movie__genres">
+      <div class="single-movie__genres" v-if="movieGenres">
         <a
           v-for="genre in movieGenres"
           :key="genre.id"
@@ -78,9 +78,13 @@ export default {
     },
     movieGenres () {
       let genres = []
+      
       if (this.movie && this.movie.genre_ids) {
        return genres = this.movie.genre_ids
           .map(genreId => this.getGenre(genreId))
+      } else if (this.movie && this.movie.genres) {
+        return genres = this.movie.genres
+          .map(genreId => this.getGenre(genreId.id))
       }
     },
   },
@@ -104,17 +108,32 @@ export default {
 </script>
 
 <style lang="scss">
+
+@import '~bulma/sass/utilities/all';
+
   $border-radius: 15px;
 
   .single-movie {
     border-radius: $border-radius;
     display: flex;
     min-height: 350px;
+    @include mobile {
+      flex-direction: column;
+    }
+    a {
+      @include mobile {
+        text-align: center;
+      }
+    }
     &__poster {
       border-radius: $border-radius;  
       flex: 3;
       height: 100%;
       width: 100%;
+      @include mobile {
+        width: 60%;
+        text-align: center;
+      }
     }
     &__title {
       margin: 1.5rem 0;
@@ -128,6 +147,9 @@ export default {
       text-align: center;
       margin: 0 auto;
       flex: none;
+      @include mobile {
+        width: 100%;
+      }
     }
     &__rate-like {
       display: flex;

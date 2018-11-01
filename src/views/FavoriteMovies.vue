@@ -1,6 +1,6 @@
 <template>
   <div class="favorite-movies section">
-    <section v-if="favoriteMoviesList.length > 0" class="container is-fluid">
+    <section v-if="favoriteMoviesList.length" class="container is-fluid">
         <movies 
         :results="favoriteMoviesList" 
         :pagination="false"
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     fetchMoviesFromId () {
-      if (this.favoriteMovies.length > 0) {
+      if (this.favoriteMovies.length) {
         this.loading = true
         this.favoriteMovies.map(movie => {
           this.$store

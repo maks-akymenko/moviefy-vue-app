@@ -49,8 +49,8 @@
 
 <script>
 import to from 'await-to-js';
-import Movies from './Movies'
 import { mapGetters } from 'vuex'
+import Movies from './Movies'
 
 const { getGenre } = mapGetters(['getGenre'])
 
@@ -117,7 +117,6 @@ export default {
       }
     },
     removeGenreFromSearch (genre) {
-      console.log(this.$route)
       let route = this.$route
       let genresIds = this.genresIds.filter(id => id !== genre.id)
       this.$router.push({

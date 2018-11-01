@@ -3,20 +3,32 @@
     <section class="container is-fluid">
       <heading :class="{'extra-padding' : !pagination }">{{ title }}</heading>
 
-      <pagination v-if="pagination" :current-page="page" :total-pages="totalPages" :route-name="paginationRouteName"></pagination>
+      <pagination 
+        v-if="pagination" 
+        :current-page="page" 
+        :total-pages="totalPages" 
+        :route-name="paginationRouteName"
+      >
+      </pagination>
   
       <div class="columns is-multiline popular-movies__results" data-loader-target >
         <loader type="cards" v-show="loading"></loader>
 
         <div
-        class="column is-12 is-half-desktop is-half-fullhd"
+        class="column is-12 is-full-desktop is-half-fullhd"
         v-for="movie in results"
         :key="movie.id">
 
           <single-movie :movie="movie" />
         </div>
       </div>
-      <pagination v-if="pagination" :current-page="page" :total-pages="totalPages" :route-name="paginationRouteName"></pagination>
+      <pagination 
+        v-if="pagination" 
+        :current-page="page" 
+        :total-pages="totalPages" 
+        :route-name="paginationRouteName"
+      >
+      </pagination>
     </section>
   </div>
 </template>

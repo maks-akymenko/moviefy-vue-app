@@ -9,7 +9,6 @@
         v-model="searchInput"
         @input="handleSearchInput"
       />
-
       <dropdown-item
       v-if="searchError"
       custom class="app-search__info">

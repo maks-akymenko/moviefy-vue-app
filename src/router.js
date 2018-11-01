@@ -17,7 +17,7 @@ const router = new Router({
       name: 'popular-movies',
       component: PopularMovies,
       meta: {
-        title: 'Moviefy - Popular'
+        title: 'Moviefy | Popular'
       },
       beforeEnter (to, from, next) {
         if (to.query.page < 1) {
@@ -39,7 +39,7 @@ const router = new Router({
       path: '/movies/:id',
       name: 'movie',
       meta: {
-        title: 'Moviefy - Single Movie'
+        title: 'Moviefy | Single Movie'
       },
       component: () => import(/* webpackChunkName: "movie" */ './views/MoviePage.vue')
     },
@@ -50,14 +50,17 @@ const router = new Router({
       props: route => ({
         page: Number(route.query.page || 1),
         genresIds: store.getters.moviesGenresToSearch
-      })
+      }),
+      meta: {
+        title: 'Moviefy | Search'
+      },
     },
     {
-      path: '/favorite',
+      path: '/movies-favorite',
       name: 'favorite-movies',
       component: () => import(/* webpackChunkName: "movie-search" */ './views/FavoriteMovies.vue'),
       meta: {
-        title: 'Moviefy - Favorite'
+        title: 'Moviefy | Favorite'
       },
       props: route => {
         return {

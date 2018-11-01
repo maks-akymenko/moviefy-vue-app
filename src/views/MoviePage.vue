@@ -29,7 +29,7 @@
           {{ movie.title }}({{ formattedDate }})
         </h1>
         <p 
-          v-if="movie.tagline.length > 0" 
+          v-if="movie.tagline.length" 
           class="is-size-4 has-text-white-ter has-text-centered">
           "{{ movie.tagline }}"
         </p>
@@ -39,7 +39,6 @@
             :rating="movie.vote_average"
             :votes-count="movie.vote_count">
           </movie-rating>
-          <share-icon></share-icon>
         </div>
         <h4 class="has-text-white-ter is-size-3 has-text-weight-bold">Overview:</h4>
         <p class="movie-details__overview has-text-white-ter is-size-5">
@@ -200,6 +199,7 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '~bulma/sass/utilities/all';
 
   $border-radius: 5px;
 
@@ -231,15 +231,23 @@ export default {
           right: 0;
           bottom: 0;
           background-color: #2D2D2D;
-          opacity: 0.4;
+          opacity: 0.7;
         }
       }
       &__container {
         display: flex;
+        @include until-widescreen {
+          display: flex;
+          flex-direction: column;  
+          align-items: center;
+        }
       }
       &__full-info {
         padding: 0 5rem;
         flex: 2;
+        @include mobile {
+          padding: 0rem;
+        }
       }
       &__trailer {
         flex: 2;
@@ -249,6 +257,14 @@ export default {
         flex: 1;
         flex-direction: column;
         justify-content: space-around;
+        @include until-widescreen {
+          flex-direction: row;
+          text-align: center;
+          margin: 5rem 0 2rem 0;
+          @include mobile {
+            flex-direction: column;
+          }
+        }
       }
       &__poster {
         border-radius: $border-radius;

@@ -81,7 +81,16 @@ export default {
 @import '~bulma/sass/utilities/all';
   .pagination {
     padding: 2rem 0;
-  }
-    @include mobile {
+    & > * {
+      @include mobile {
+        margin: 1rem 1rem;
+      }
+    }
+    &__results {
+      @include mobile {
+        padding: 1rem 0rem;
+        order: 2; 
+      }
+    }
   }
 </style>
