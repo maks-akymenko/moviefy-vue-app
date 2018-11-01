@@ -42,7 +42,3 @@ export function trim (str, char) {
     '^[' + char + ']+|[' + char + ']+$', 'g'
   ), '')
 }
-
-export function removeRepeatedCommas (str = '') {
-  return trim(str.replace(/,+/g, ','), ',')
-}

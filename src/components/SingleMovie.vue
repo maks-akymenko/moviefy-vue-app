@@ -9,6 +9,16 @@
       <router-link :to="movieLink">
         <h2 class="single-movie__title title is-size-2 has-text-white-ter">{{ movie.title }}({{ formattedDate }})</h2>
       </router-link>
+
+      <div class="single-movie__genres">
+        <a
+          v-for="genre in movieGenres"
+          :key="genre.id"
+          class="tag is-rounded is-warning movie-card__genre"
+          @click.prevent="showMoviesOfTheSameGenre(genre)"
+        >{{ genre.name }}</a>
+      </div>
+
       <p class="has-text-white-ter">{{ shortDescription }}</p>
       <div class="single-movie__rate-like">
       <favorite-movie-button :movieId="movie.id"></favorite-movie-button>
@@ -27,6 +37,9 @@ import { truncate, formatDate, kebabCaseTransformer } from '../shared/utils/text
 import MovieRating from './MovieRating'
 import FavoriteMovieButton from './FavoriteMovieButton'
 
+import uniqWith from 'lodash/uniqWith'
+import isEqual from 'lodash/isEqual'
+
 export default {
   components: {
     MovieRating,
@@ -39,9 +52,6 @@ export default {
     }
   },
   computed: {
-    getGenreNameFromId () {
-      return this.movie.genre_ids.map(genre => this.$store.getters.getGenre(genre))
-    },
     movieLink () {
       return {
         path: `/movies/${this.movie.id}`
@@ -60,8 +70,37 @@ export default {
     shortDescription () {
       return truncate(this.movie.overview || '', 180)
     },
+    movieGenresMap () {
+      return this.$store.state.movies.genresMap
+    },
+    movieGenresToSearch (){
+      return this.$store.getters.moviesGenresToSearch
+    },
+    movieGenres () {
+      let genres = []
+      if (this.movie && this.movie.genre_ids) {
+       return genres = this.movie.genre_ids
+          .map(genreId => this.getGenre(genreId))
+      }
+    },
+  },
+  methods: {
+    getGenre (genreId) {
+      return this.movieGenresMap[genreId]
+    },
+    showMoviesOfTheSameGenre (genre) {
+      let withGenres = [...this.movieGenresToSearch]
+      let genreId = Number(genre.id)
+        if (!withGenres.includes(genreId)) {
+          withGenres.push(genreId)
+        }
+        this.$router.push({
+          name: 'movies-search',
+          query: { with_genres: String(withGenres) }
+        })
+      }
+    }
   }
-}
 </script>
 
 <style lang="scss">
@@ -71,14 +110,11 @@ export default {
     border-radius: $border-radius;
     display: flex;
     min-height: 350px;
-    transition: transform 0.33s;
-    &:hover {
-      transform: rotateZ(-1deg);
-    }
     &__poster {
       border-radius: $border-radius;  
-
+      flex: 3;
       height: 100%;
+      width: 100%;
     }
     &__title {
       margin: 1.5rem 0;
@@ -97,6 +133,14 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-around;
+    }
+    &__genres {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      & > * {
+        margin: 0.5rem;
+      }
     }
   } 
 </style>

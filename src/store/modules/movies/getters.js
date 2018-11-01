@@ -7,6 +7,14 @@ const getters = {
   },
   getFavoriteMovies (state) {
     return state.favoriteMoviesId
+  },
+  moviesGenresToSearch (state, getters, rootState) {
+    return rootState.route.name === 'movies-search'
+      ? rootState.route.query.with_genres
+        .split(',')
+        .filter(Boolean)
+        .map(Number)
+      : []
   }
 }
 

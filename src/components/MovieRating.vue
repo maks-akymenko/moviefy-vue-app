@@ -18,7 +18,7 @@
         <span v-if="ratingExist">/10</span>
       </span>
       <span class="movie-rating__total-votes" v-if="ratingExist">
-        {{ votesCount }}
+        {{ votesCount }} votes
       </span>
     </div>
   </div>
@@ -73,6 +73,9 @@ export default {
     flex-direction: column;
     font-size: 0.8rem;
     color: #b1b0b0;
+  }
+  &__total-votes {
+    text-align: left;
   }
 }
 </style>

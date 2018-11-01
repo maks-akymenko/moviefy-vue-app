@@ -38,3 +38,9 @@ export function getMovieSearchResults (params) {
     params
   })
 }
+
+export function getMoviesWithFiltering (params) {
+  return axiosMovieDB('3/discover/movie', {
+    params
+  })
+}

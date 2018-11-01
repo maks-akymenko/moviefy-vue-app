@@ -38,12 +38,19 @@ const router = new Router({
     {
       path: '/movies/:id',
       name: 'movie',
+      meta: {
+        title: 'Moviefy - Single Movie'
+      },
       component: () => import(/* webpackChunkName: "movie" */ './views/MoviePage.vue')
     },
     {
-      path: '/movies/genres/:genre',
-      name: 'searched-movies',
-      component: () => import(/* webpackChunkName: "movie-search" */ './views/SearchedMovies.vue')
+      path: '/movies-search',
+      name: 'movies-search',
+      component: () => import(/* webpackChunkName: "movie" */ './views/SearchedMovies.vue'),
+      props: route => ({
+        page: Number(route.query.page || 1),
+        genresIds: store.getters.moviesGenresToSearch
+      })
     },
     {
       path: '/favorite',
