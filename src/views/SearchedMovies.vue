@@ -30,6 +30,21 @@
           <div v-else class="control">
             <span class="tag is-warning is-small">All</span>
           </div>
+          <template v-if="sortBy">
+
+            <h2 v-if="sortBy" class="
+              control title is-4
+              has-text-white-ter
+              has-text-weight-bold"
+            >Sorted by: </h2>
+            <template>
+              <div class="control">
+                <span class="tag is-warning is-small">
+                  {{ sortBy }}
+                </span>
+              </div>
+            </template>
+          </template>
         </div>
       </section>
 
@@ -67,6 +82,10 @@ export default {
     genresIds: {
       type: Array,
       required: false
+    },
+    sortBy: {
+      type: String, 
+      required: false
     }
   },
   data () {
@@ -83,7 +102,7 @@ export default {
       return this.genresIds
         .map(this.getGenre)
         .filter(Boolean)
-    }
+    },
   },
   watch: {
     page () {
@@ -103,7 +122,8 @@ export default {
     async getMoviesListForCurrentPageAndFilters () {
       return this.getMoviesList({
         page: this.page,
-        with_genres: this.genresIds.toString()
+        with_genres: this.genresIds.toString(),
+        sort_by: this.sortBy
       })
     },
     async getMoviesList (params) {
@@ -127,7 +147,7 @@ export default {
           with_genres: String(genresIds)
         }
       })
-    }
+    },
   }
 }
 </script>

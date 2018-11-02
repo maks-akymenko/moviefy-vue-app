@@ -49,11 +49,12 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "movie" */ './views/SearchedMovies.vue'),
       props: route => ({
         page: Number(route.query.page || 1),
-        genresIds: store.getters.moviesGenresToSearch
+        genresIds: store.getters.moviesGenresToSearch,
+        sortBy: route.query.sort_by || ''
       }),
       meta: {
         title: 'Moviefy | Search'
-      },
+      }
     },
     {
       path: '/movies-favorite',

@@ -2,12 +2,13 @@
   <div class="single-movie has-background-black">
 
     <router-link :to="movieLink">
-      <img class="single-movie__poster" :src="posterPath" :alt="movie.title">
+      <img v-if="posterPath" class="single-movie__poster" :src="posterPath" :alt="movie.title">
+      <h2 v-else class="title is-size-4 single-movie__no-image-text">There are no image yet...</h2>
     </router-link>
 
     <div class="single-movie__info">
-      <router-link :to="movieLink">
-        <h2 class="single-movie__title title is-size-2 is-size-5-mobile has-text-white-ter">{{ movie.title }}({{ formattedDate }})</h2>
+      <router-link v-if="movie" :to="movieLink">
+        <h2 class="single-movie__title title is-size-2 is-size-5-mobile has-text-white-ter">{{ movie.title }}{{ formattedDate }}</h2>
       </router-link>
 
       <div class="single-movie__genres" v-if="movieGenres">
@@ -21,7 +22,7 @@
 
       <p class="has-text-white-ter">{{ shortDescription }}</p>
       <div class="single-movie__rate-like">
-      <favorite-movie-button :movieId="movie.id"></favorite-movie-button>
+      <favorite-movie-button v-if="movie" :movieId="movie.id"></favorite-movie-button>
       <movie-rating
         :rating="movie.vote_average"
         :votes-count="movie.vote_count">
@@ -59,7 +60,7 @@ export default {
     },
     formattedDate () {
       return this.movie.release_date 
-        ? formatDate(this.movie.release_date)
+        ? `(${formatDate(this.movie.release_date)})`
         : ''
     },
     posterPath () {

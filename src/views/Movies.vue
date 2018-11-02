@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import to from 'await-to-js';
 
 import SingleMovie from '../components/SingleMovie'
 import Pagination from '../components/Pagination'
