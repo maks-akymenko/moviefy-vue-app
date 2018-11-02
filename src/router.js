@@ -17,25 +17,16 @@ const router = new Router({
     },
     {
       path: '/login',
-      component: LoginPage,
-      meta: {
-        title: 'Moviefy | Log in'
-      }
+      component: LoginPage
     },
     {
       path: '/signup',
-      component: SignUp,
-      meta: {
-        title: 'Moviefy | Sign Up'
-      }
+      component: SignUp
     },
     {
       path: '/movies',
       name: 'popular-movies',
       component: PopularMovies,
-      meta: {
-        title: 'Moviefy | Popular'
-      },
       beforeEnter (to, from, next) {
         if (to.query.page < 1) {
           next({
@@ -55,9 +46,6 @@ const router = new Router({
     {
       path: '/movies/:id',
       name: 'movie',
-      meta: {
-        title: 'Moviefy | Single Movie'
-      },
       component: () => import(/* webpackChunkName: "movie" */ './views/MoviePage.vue')
     },
     {
@@ -68,17 +56,13 @@ const router = new Router({
         page: Number(route.query.page || 1),
         genresIds: store.getters.moviesGenresToSearch,
         sortBy: route.query.sort_by || ''
-      }),
-      meta: {
-        title: 'Moviefy | Search'
-      }
+      })
     },
     {
       path: '/movies-favorite',
       name: 'favorite-movies',
       component: () => import(/* webpackChunkName: "movie-search" */ './views/FavoriteMovies.vue'),
       meta: {
-        title: 'Moviefy | Favorite',
         auth: true
       },
       props: route => {
@@ -86,17 +70,24 @@ const router = new Router({
           favoriteMovies: store.getters.getFavoriteMovies
         }
       }
+    },
+    {
+      path: '/personal-cabinet',
+      name: 'personal-cabinet',
+      component: () => import(/* webpackChunkName: "movie-search" */ './views/PersonalCabinet.vue'),
+      meta: {
+        auth: true
+      }
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title
   let currentUser = firebase.auth().currentUser
+  console.log(currentUser)
   let auth = to.matched.some(route => route.meta.auth)
-
+  console.log(auth)
   if (auth && !currentUser) next('login')
-  else if (!auth && currentUser) next('movies')
   else next()
 })
 

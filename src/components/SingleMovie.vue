@@ -1,7 +1,7 @@
 <template>
   <div class="single-movie has-background-black">
 
-    <router-link :to="movieLink">
+    <router-link :to="movieLink" @click="alert('it works')">
       <img v-if="posterPath" class="single-movie__poster" :src="posterPath" :alt="movie.title">
       <h2 v-else class="title is-size-4 single-movie__no-image-text">There are no image yet...</h2>
     </router-link>
@@ -38,9 +38,6 @@ import { truncate, formatDate, kebabCaseTransformer } from '../shared/utils/text
 import MovieRating from './MovieRating'
 import FavoriteMovieButton from './FavoriteMovieButton'
 
-import uniqWith from 'lodash/uniqWith'
-import isEqual from 'lodash/isEqual'
-
 export default {
   components: {
     MovieRating,
@@ -54,7 +51,7 @@ export default {
   },
   computed: {
     movieLink () {
-      return {
+      return this.movie && {
         path: `/movies/${this.movie.id}`
       }
     },

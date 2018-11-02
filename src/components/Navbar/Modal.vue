@@ -2,7 +2,7 @@
 <transition name="modal">
     <div class="modal-mask" @click="closeModal">
       <div class="modal-wrapper">
-        <div class="modal-container" @click.stop>
+        <div class="modal-container has-background-black" @click.stop>
 
           <div class="modal-header title is-size-2">
             <slot name="header">
@@ -13,15 +13,6 @@
           <div class="modal-body">
             <slot name="body">
               default body
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="closeModal">
-                OK
-              </button>
             </slot>
           </div>
         </div>
@@ -76,18 +67,18 @@ export default {
 }
 
 .modal-container {
-  width: 300px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
+  width: 500px;
+  margin: 0 auto;
+  padding: 40px 0;
+  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
 }
 
 .modal-header h3 {
-  margin-top: 0;
+  text-align: center;
+  color: whitesmoke;
+  font-weight: 700;
 }
 
 .modal-body {

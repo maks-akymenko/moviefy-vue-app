@@ -8,6 +8,7 @@
       </div>
 
         <movies 
+        v-if="popularMovies "
         :results="popularMovies" 
         title="Popular movies"
         :page="page"
@@ -16,7 +17,7 @@
         pagination-route-name="popular-movies"
         >
         </movies>
-        
+        <notifications group="logout"/>
     </section>
   </div>
 </template>
@@ -55,9 +56,12 @@ export default {
   computed: {
     getGenre,
     genresToSearch () {
-      return this.$store.state.movies.genresIds
-        .map(this.getGenre)
-        .filter(Boolean)
+      // we wait until id's will come from store to prevent error
+      if (this.$store.state.movies.genresIds.length){
+        return this.$store.state.movies.genresIds
+          .map(this.getGenre)
+          .filter(Boolean)
+      }
     }
   },
   methods: {
@@ -91,5 +95,16 @@ export default {
   .sorting {
     display: flex;
     justify-content: center;
+  }
+  .vue-notification {
+    padding: 20px;
+    margin: 0 5px 5px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: whitesmoke;
+    background: #4a4a4a;
+    border-left: 5px solid #4a4a4a;
   }
 </style>
