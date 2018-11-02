@@ -5,7 +5,7 @@
     'active' : active
   }"
   v-bind="$attrs"
-  :title="active ? 'Active' : 'Inactive' "
+  :title="active ? 'Logged in' : 'Logged out' "
   v-on="$listeners"
   ></user-icon>
 </template>

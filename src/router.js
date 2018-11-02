@@ -46,7 +46,7 @@ const router = new Router({
     {
       path: '/movies/:id',
       name: 'movie',
-      component: () => import(/* webpackChunkName: "movie" */ './views/MoviePage.vue')
+      component: () => import(/* webpackChunkName: "single-movie" */ './views/MoviePage.vue')
     },
     {
       path: '/movies-search',
@@ -74,7 +74,7 @@ const router = new Router({
     {
       path: '/personal-cabinet',
       name: 'personal-cabinet',
-      component: () => import(/* webpackChunkName: "movie-search" */ './views/PersonalCabinet.vue'),
+      component: () => import(/* webpackChunkName: "personal-cabinet" */ './views/PersonalCabinet.vue'),
       meta: {
         auth: true
       }

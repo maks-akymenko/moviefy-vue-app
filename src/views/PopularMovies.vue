@@ -5,7 +5,7 @@
         <genre-choice :items="genresToSearch">Choose a genre</genre-choice>
         <movie-sorting></movie-sorting>
       </div>
-
+        <notifications group="notLoggedIn"/>
         <movies 
         v-if="popularMovies "
         :results="popularMovies" 

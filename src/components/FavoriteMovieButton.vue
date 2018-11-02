@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 
 import HeartIcon from './icons/HeartIcon'
 export default {
@@ -26,11 +27,23 @@ export default {
   computed: {
     active () {
       return this.$store.getters['isMovieFavorite'](this.movieId)
+    },
+    isUserLoggedIn () {
+      return firebase.auth().currentUser !== null
     }
   },
   methods: {
     toggleActive () {
-      this.$store.dispatch('selectFavoriteMovie', { movieId: this.movieId, favorite: !this.active })
+      if (this.isUserLoggedIn) {
+        this.$store.dispatch('selectFavoriteMovie', { movieId: this.movieId, favorite: !this.active })
+      } else {
+        this.$notify({
+            group: 'notLoggedIn',
+            type: 'error',
+            duration: 1000,
+            text: 'To add movies to favorite you need to be logged in'
+          });
+      }
     }
   }
 }
