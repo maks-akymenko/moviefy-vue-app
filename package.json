@@ -12,6 +12,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.4.1",
     "@fortawesome/vue-fontawesome": "^0.1.1",
     "await-to-js": "^2.0.1",
+    "firebase": "^5.5.7",
     "vue": "^2.5.17",
     "vue-carousel": "^0.16.0-rc1",
     "vue-owl-carousel": "^2.0.3",
@@ -25,6 +26,7 @@
     "@vue/eslint-config-standard": "^3.0.5",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "vue-gh-pages": "^1.19.0",
     "vue-template-compiler": "^2.5.17"
   }
 }

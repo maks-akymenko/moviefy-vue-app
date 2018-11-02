@@ -110,7 +110,6 @@ from '../shared/utils/textAndDateUtils'
 import Heading from '../components/Heading'
 import MovieRating from '../components/MovieRating'
 import HeartIcon from '../components/icons/HeartIcon'
-import ShareIcon from '../components/icons/ShareIcon'
 import MovieSlider from '../components/MovieSlider'
 import FavoriteMovieButton from '../components/FavoriteMovieButton'
 
@@ -120,7 +119,6 @@ export default {
     Heading,
     MovieRating,
     HeartIcon,
-    ShareIcon,
     MovieSlider,
     FavoriteMovieButton
   },

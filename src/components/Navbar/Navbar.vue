@@ -3,11 +3,15 @@
     <logo size="medium" path="/">
       Moviefy
     </logo>
-      <router-link tag="button" to="/movies-favorite" class="button is-warning is-medium is-rounded">
-        Favorite Movies ❤
-      </router-link>
-    <div>
+    <div class="is-flex">
       <search-bar></search-bar>
+      <user @click="showModal = true"></user>
+      <modal v-if="showModal" :show="showModal" @close="showModal = false">
+        <div slot="body">
+          <login></login>
+        </div>
+        <h3 slot="header">Log in to your personal cabinet</h3>
+      </modal>
     </div>
   </div>  
 </template>
@@ -15,11 +19,22 @@
 <script>
 import Logo from './Logo'
 import SearchBar from './SearchBar'
+import User from './User'
+import Modal from './Modal'
+import Login from './Login'
 
 export default {
   components: {
     Logo,
     SearchBar,
+    User,
+    Modal,
+    Login
+  },
+  data () {
+    return {
+      showModal: false
+    }
   }
 }
 </script>

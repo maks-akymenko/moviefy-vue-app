@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store'
+import firebase from 'firebase'
 import PopularMovies from './views/PopularMovies'
+import LoginPage from './views/LoginPage'
+import SignUp from './views/SignUp'
 
 Vue.use(Router)
 
@@ -11,6 +14,20 @@ const router = new Router({
     {
       path: '/',
       redirect: '/movies'
+    },
+    {
+      path: '/login',
+      component: LoginPage,
+      meta: {
+        title: 'Moviefy | Log in'
+      }
+    },
+    {
+      path: '/signup',
+      component: SignUp,
+      meta: {
+        title: 'Moviefy | Sign Up'
+      }
     },
     {
       path: '/movies',
@@ -61,7 +78,8 @@ const router = new Router({
       name: 'favorite-movies',
       component: () => import(/* webpackChunkName: "movie-search" */ './views/FavoriteMovies.vue'),
       meta: {
-        title: 'Moviefy | Favorite'
+        title: 'Moviefy | Favorite',
+        auth: true
       },
       props: route => {
         return {
@@ -74,7 +92,12 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title
-  next()
+  let currentUser = firebase.auth().currentUser
+  let auth = to.matched.some(route => route.meta.auth)
+
+  if (auth && !currentUser) next('login')
+  else if (!auth && currentUser) next('movies')
+  else next()
 })
 
 export default router
