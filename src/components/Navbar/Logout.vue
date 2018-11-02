@@ -15,18 +15,19 @@ export default {
       firebase.auth().signOut()
         .then(() => {
           if (this.$route.name !== 'popular-movies') {
-            this.$router.push('movies')
-            this.closeAndNotify()
+            this.$router.push('movies', () => this.closeAndNotify())
           } else {
             this.closeAndNotify()
           }
       })
+      .catch(error => alert('Oops.' + error.message))
     },
     closeAndNotify () {
       this.$emit('close')
       this.$notify({
         group: 'logout',
         type: 'success',
+        duration: 1000,
         text: 'You were successfully logged out of application'
       });
     }

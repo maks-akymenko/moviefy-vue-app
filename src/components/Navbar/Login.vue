@@ -52,17 +52,22 @@ export default {
     login () {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
-          this.$router.push('personal-cabinet')
-          this.$emit('close')
-          this.$notify({
-            group: 'login',
-            type: 'success',
-            text: 'You were successfully logged in'
-          });
+          if (this.$route.name !== 'popular-movies') {
+            this.$router.push('movies', () => this.closeAndNotify())
+          } else {
+            this.closeAndNotify()
+          }
         })
-        .catch(error => {
-          alert('Oops.' + error.message)
-        })
+        .catch(error => alert('Oops.' + error.message))
+    },
+    closeAndNotify () {
+      this.$emit('close')
+      this.$notify({
+        group: 'login',
+        type: 'success',
+        duration: 1000,
+        text: 'You were successfully logged in'
+      });
     }
   },
   watch: {
