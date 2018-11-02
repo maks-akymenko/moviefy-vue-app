@@ -15,15 +15,13 @@ export default {
       firebase.auth().signOut()
         .then(() => {
           if (this.$route.name !== 'popular-movies') {
-            this.$router.push('popular-movies')
+            this.$router.push('movies')
             this.closeAndNotify()
           } else {
             this.closeAndNotify()
           }
       })
-    }
-  },
-  methods: {
+    },
     closeAndNotify () {
       this.$emit('close')
       this.$notify({

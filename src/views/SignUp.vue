@@ -1,6 +1,6 @@
 <template>
   <div class="login section">
-    <h3 class="title is-size-2 has-text-centered has-text-white-ter">Sign Up</h3>
+    <h2 class="title is-size-1 has-text-centered has-text-white-ter">Create an account</h2>
     <div class="field">
       <label class="label has-text-white-ter">Email</label>
       <div class="control">
@@ -13,10 +13,10 @@
         <input v-model="password" class="input is-large" type="password" placeholder="Password">
       </div>
       <div class="has-text-centered">
-        <button @click="signUp" class="login__button button is-large">Sign in</button>
+        <button @click="signUp" class="login__button button is-large is-info is-rounded">Sign in</button>
       </div>
     </div>
-    <p class="title is-size-5 has-text-centered has-text-white-ter">Remembered that had one ?
+    <p class="title is-size-6 has-text-centered has-text-white-ter">Remembered that had one ?
       <router-link to="/login">
         Go back to login page :)
       </router-link>
@@ -49,12 +49,20 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .login {
-    width: 450px;
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    justify-content: center;
+    width: 500px;
     margin: 0 auto;
     &__button {
       margin-top: 1rem;
+    }
+    a {
+      color: whitesmoke;
+      text-decoration: underline;
     }
   }
 </style>

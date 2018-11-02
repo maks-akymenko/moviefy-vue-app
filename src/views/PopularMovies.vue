@@ -1,6 +1,5 @@
 <template>
   <div class="popular-movies section">
-    <navbar class="container"></navbar>
     <section class="container is-fluid">
       <div class="sorting">
         <genre-choice :items="genresToSearch">Choose a genre</genre-choice>
@@ -28,7 +27,6 @@ import { mapGetters } from 'vuex'
 import Movies from './Movies'
 import GenreChoice from '../components/GenreChoice'
 import MovieSorting from '../components/MovieSorting'
-import Navbar from '../components/Navbar/Navbar'
 
 const { getGenre } = mapGetters(['getGenre'])
 
@@ -37,8 +35,7 @@ export default {
   components: {
     Movies,
     GenreChoice,
-    MovieSorting,
-    Navbar
+    MovieSorting
   },
   props: {
     page: {

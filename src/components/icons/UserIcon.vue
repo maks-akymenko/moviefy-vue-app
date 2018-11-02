@@ -3,7 +3,6 @@
     <font-awesome-icon
     :icon="userIcon"
     size="3x"
-    class="user-icon"
     v-bind="$attrs"
     v-on="$listeners"
     />
@@ -24,13 +23,6 @@ export default {
 </script>
 
 <style lang="scss">
-  .user-icon {
-    cursor: pointer;
-    transition: color 0.33s;
-    &:hover {
-      color: whitesmoke;
-    }
-  }
 </style>
 
 

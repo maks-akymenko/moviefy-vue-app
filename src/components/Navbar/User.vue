@@ -1,7 +1,11 @@
 <template>
   <user-icon
-  :class="{'active' : active}"
+  :class="{
+    'user-icon': true,
+    'active' : active
+  }"
   v-bind="$attrs"
+  :title="active ? 'Active' : 'Inactive' "
   v-on="$listeners"
   ></user-icon>
 </template>
@@ -22,6 +26,11 @@ export default {
 </script>
 
 <style>
+  .user-icon {
+    margin-left: 2rem;
+    cursor: pointer;
+    color: whitesmoke;
+  }
   .active {
     color: yellow;
   }

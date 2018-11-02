@@ -2,6 +2,8 @@
   <div class="login"
   :class="['login-type--' + view]"
   >
+  <form @submit.prevent="login">
+    <h2 v-if="view === 'page'" class="title is-size-1 has-text-centered has-text-white-ter">Log in</h2>
     <div class="field">
       <label class="label">Email</label>
       <div class="control">
@@ -13,8 +15,8 @@
       <div class="control">
         <input v-model="password" class="input is-large" type="password" placeholder="Password">
       </div>
-      <div class="has-text-centered">
-        <button @click="login" class="login__button button is-large is-info is-rounded">Login</button>
+      <div class="control has-text-centered">
+        <button type="submit" class="login__button button is-large is-info is-rounded">Login</button>
       </div>
     </div>
     <p class="title is-size-6">You don't have an account ?
@@ -22,6 +24,7 @@
         Create one right now :)
       </router-link>
     </p>
+  </form>
   </div>
 </template>
 
@@ -61,11 +64,16 @@ export default {
           alert('Oops.' + error.message)
         })
     }
+  },
+  watch: {
+    $route () {
+      this.$emit('close')
+    }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .login {
     margin: 0 auto;
     &__button {
@@ -81,6 +89,7 @@ export default {
       }
     }
     &-type--popup {
+      padding: 20px;
       label, p {
         color: #4a4a4a
       }
