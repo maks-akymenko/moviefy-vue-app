@@ -21,6 +21,11 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  watch: {
+    active (newState) {
+      console.log(newState)
+    }
   }
 }
 </script>

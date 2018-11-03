@@ -67,7 +67,7 @@ import to from 'await-to-js';
 import { mapGetters } from 'vuex'
 import Movies from './Movies'
 
-const { getGenre } = mapGetters(['getGenre'])
+const { getGenre } = mapGetters('movies',['getGenre'])
 
 export default {
   components: {
@@ -114,7 +114,7 @@ export default {
   },
   async created () {
     await Promise.all([
-      this.$store.dispatch('getMoviesGenres'),
+      this.$store.dispatch('movies/getMoviesGenres'),
       this.getMoviesListForCurrentPageAndFilters()
     ])
   },
@@ -128,7 +128,7 @@ export default {
     },
     async getMoviesList (params) {
       this.loading = true
-      let [error, results] = await to(this.$store.dispatch('getMoviesWithFiltering', params))
+      let [error, results] = await to(this.$store.dispatch('movies/getMoviesWithFiltering', params))
       this.loading = false
       this.error = error
       if (results) {

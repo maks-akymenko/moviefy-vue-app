@@ -45,7 +45,7 @@ export default {
         this.loading = true
         this.favoriteMovies.map(movie => {
           this.$store
-            .dispatch('getMovie', movie)
+            .dispatch('movies/getMovie', movie)
             .then((result) => {
               this.favoriteMoviesList.push(result)
               this.loading = false

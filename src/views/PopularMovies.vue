@@ -30,7 +30,7 @@ import Movies from './Movies'
 import GenreChoice from '../components/GenreChoice'
 import MovieSorting from '../components/MovieSorting'
 
-const { getGenre } = mapGetters(['getGenre'])
+const { getGenre } = mapGetters('movies', ['getGenre'])
 
 export default {
   name: 'popular-movies',
@@ -66,7 +66,7 @@ export default {
   methods: {
     async fetchPopularMovies (page) {
       this.loading = true
-      const [error, response] = await to(this.$store.dispatch('getPopularMovies', page))
+      const [error, response] = await to(this.$store.dispatch('movies/getPopularMovies', page))
 
       if (error) throw error
       if (response) {
@@ -83,7 +83,7 @@ export default {
   },
   async created () {
     await Promise.all([
-    this.$store.dispatch('getMoviesGenres'),
+    this.$store.dispatch('movies/getMoviesGenres'),
     this.fetchPopularMovies(this.page)
     ])
   }

@@ -54,7 +54,7 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "movie" */ './views/SearchedMovies.vue'),
       props: route => ({
         page: Number(route.query.page || 1),
-        genresIds: store.getters.moviesGenresToSearch,
+        genresIds: store.getters['movies/moviesGenresToSearch'],
         sortBy: route.query.sort_by || ''
       })
     },
@@ -67,7 +67,7 @@ const router = new Router({
       },
       props: route => {
         return {
-          favoriteMovies: store.getters.getFavoriteMovies
+          favoriteMovies: store.getters['movies/getFavoriteMovies']
         }
       }
     },

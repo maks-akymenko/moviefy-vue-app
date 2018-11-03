@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     active () {
-      return this.$store.getters['isMovieFavorite'](this.movieId)
+      return this.$store.getters['movies/isMovieFavorite'](this.movieId)
     },
     isUserLoggedIn () {
       return firebase.auth().currentUser !== null
@@ -35,7 +35,7 @@ export default {
   methods: {
     toggleActive () {
       if (this.isUserLoggedIn) {
-        this.$store.dispatch('selectFavoriteMovie', { movieId: this.movieId, favorite: !this.active })
+        this.$store.dispatch('movies/selectFavoriteMovie', { movieId: this.movieId, favorite: !this.active })
       } else {
         this.$notify({
             group: 'notLoggedIn',

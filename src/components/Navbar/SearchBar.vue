@@ -104,7 +104,7 @@ export default {
       if (query !== '') {
         this.loading = true
         const [error, searchResults] = await to(
-          this.$store.dispatch('getMovieSearchResults', query)
+          this.$store.dispatch('movies/getMovieSearchResults', query)
         )
         this.loading = false
         this.searchError = error

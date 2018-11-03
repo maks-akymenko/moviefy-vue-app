@@ -9,6 +9,7 @@ const state = {
 }
 
 export default {
+  namespaced: true,
   getters,
   state,
   mutations,

@@ -72,7 +72,7 @@ export default {
       return this.$store.state.movies.genresMap
     },
     movieGenresToSearch (){
-      return this.$store.getters.moviesGenresToSearch
+      return this.$store.getters['movies/moviesGenresToSearch']
     },
     movieGenres () {
       let genres = []

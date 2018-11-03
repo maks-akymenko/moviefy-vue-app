@@ -132,18 +132,18 @@ export default {
   },
   methods: {
   async fetchMovie (id) {
-    const [error, response] = await to(this.$store.dispatch('getMovie', id))
+    const [error, response] = await to(this.$store.dispatch('movies/getMovie', id))
       if (error) throw error
       if (response) this.movie = response
   },
   async fetchMovieVideo (id) {
-    const [error, response] = await to(this.$store.dispatch('getMovieVideo', id))
+    const [error, response] = await to(this.$store.dispatch('movies/getMovieVideo', id))
 
       if (error) throw error
       if (response) this.movieVideo = response.results
   },
   async fetchSimilarMovies (id) {
-    const [error, response] = await to(this.$store.dispatch('getSimilarMovies', id))
+    const [error, response] = await to(this.$store.dispatch('movies/getSimilarMovies', id))
 
       if (error) throw error
       if (response) this.similarMovies = response.results
