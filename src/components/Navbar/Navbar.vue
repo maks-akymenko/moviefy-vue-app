@@ -5,20 +5,20 @@
     </logo>
     <div class="is-flex">
       <search-bar></search-bar>
-      <user :active="!!currentUser" @click="showModal = true"></user>
+      <user :active="isUserLoggedIn" @click="showModal = true"></user>
       <modal v-if="showModal" :show="showModal" @close="showModal = false">
-        <div v-if="!currentUser" slot="body">
+        <div v-if="!isUserLoggedIn" slot="body">
           <login type="popup" @close="closeModalAndLogInUser"></login>
         </div>
         <div class="has-text-centered" v-else slot="body">
           <router-link tag="span" to="closeModalAndGoToCabinet">
-            <a class="button is-warning is-rounded is-large m-2">
+            <a class="button is-warning is-rounded is-large m-2 ">
               Go to personal cabinet
             </a>
           </router-link>
           <logout @close="closeModalAndLogOutUser"></logout>
         </div>
-        <h3 slot="header">{{ !currentUser ? 'Sign In' : '' }}</h3>
+        <h3 slot="header">{{ !isUserLoggedIn ? 'Sign In' : '' }}</h3>
       </modal>
     </div>
   </div>  
@@ -45,23 +45,20 @@ export default {
   },
   data () {
     return {
-      showModal: false,
-      currentUser: ''
+      showModal: false
     }
   },
-  created () {
-    if (firebase.auth().currentUser) {
-      this.currentUser = firebase.auth().currentUser
+  computed: {
+    isUserLoggedIn () {
+      return this.$store.getters['user/isUserLogged']
     }
   },
   methods: {
     closeModalAndLogOutUser () {
       this.showModal = false
-      this.currentUser = ''
     },
     closeModalAndLogInUser () {
       this.showModal = false
-      this.currentUser = firebase.auth().currentUser
     },
     closeModalAndGoToCabinet () {
       this.showModal = false

@@ -29,7 +29,7 @@ export default {
       return this.$store.getters['movies/isMovieFavorite'](this.movieId)
     },
     isUserLoggedIn () {
-      return firebase.auth().currentUser !== null
+      return this.$store.getters['user/isUserLogged']
     }
   },
   methods: {

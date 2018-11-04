@@ -4,12 +4,16 @@ const state = {
 }
 
 const getters = {
-  user: state => state.user,
-  isLogged: state => (state.user !== null)
+  getUser (state) {
+    return state.user
+  },
+  isUserLogged (state) {
+    return state.user !== null
+  }
 }
 
 const mutations = {
-  setUser: (state, user) => {
+  SET_USER (state, user) {
     state.user = user
   }
 }

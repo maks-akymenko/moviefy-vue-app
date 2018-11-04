@@ -14,6 +14,7 @@ export default {
     logout () {
       firebase.auth().signOut()
         .then(() => {
+          this.$store.commit('user/SET_USER', null)
           if (this.$route.name !== 'popular-movies') {
             this.$router.push('movies', () => this.closeAndNotify())
           } else {

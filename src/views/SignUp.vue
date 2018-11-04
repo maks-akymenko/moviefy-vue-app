@@ -41,6 +41,7 @@ export default {
     signUp () {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
         .then(user => {
+          this.$store.commit('user/SET_USER', user.user)
           this.$router.push('movies', () => {
             this.$notify({
               group: 'registration',

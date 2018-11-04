@@ -52,6 +52,7 @@ export default {
     login () {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
+          this.$store.commit('user/SET_USER', user.user)
           if (this.$route.name !== 'popular-movies') {
             this.$router.push('movies', () => this.closeAndNotify())
           } else {
