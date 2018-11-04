@@ -1,5 +1,5 @@
 <template>
-  <div class="single-movie has-background-black">
+  <div class="single-movie has-background-black" data-test="single-movie-container">
 
     <router-link :to="movieLink" @click="alert('it works')">
       <img v-if="posterPath" class="single-movie__poster" :src="posterPath" :alt="movie.title">

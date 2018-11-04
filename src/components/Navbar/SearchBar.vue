@@ -7,7 +7,6 @@
           slot="trigger"
           placeholder="Type movie name..."
           ref="searchInput"
-          @blur="closeAndClearInput"
           v-model="searchInput"
           @input="handleSearchInput"
         />

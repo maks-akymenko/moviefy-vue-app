@@ -8,7 +8,7 @@
       <user :active="isUserLoggedIn" @click="showModal = true"></user>
       <modal v-if="showModal" :show="showModal" @close="showModal = false">
         <div v-if="!isUserLoggedIn" slot="body">
-          <login type="popup" @close="closeModalAndLogInUser"></login>
+          <login type="popup" @close="showModal = false"></login>
         </div>
         <div class="has-text-centered" v-else slot="body">
           <router-link tag="span" to="closeModalAndGoToCabinet">
@@ -16,7 +16,7 @@
               Go to personal cabinet
             </a>
           </router-link>
-          <logout @close="closeModalAndLogOutUser"></logout>
+          <logout @close="showModal = false"></logout>
         </div>
         <h3 slot="header">{{ !isUserLoggedIn ? 'Sign In' : '' }}</h3>
       </modal>
@@ -54,12 +54,6 @@ export default {
     }
   },
   methods: {
-    closeModalAndLogOutUser () {
-      this.showModal = false
-    },
-    closeModalAndLogInUser () {
-      this.showModal = false
-    },
     closeModalAndGoToCabinet () {
       this.showModal = false
       return { path: '/personal-cabinet' }
