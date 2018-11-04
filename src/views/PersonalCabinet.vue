@@ -1,6 +1,6 @@
 <template>
-  <div class="personal-cabinet container">
-    <h1 class="title is-size-1">Welcome to your personal cabinet</h1>
+  <div class="personal-cabinet container section">
+    <h1 class="title is-size-1 has-text-centered">Welcome to your personal cabinet</h1>
   </div>
 </template>
 

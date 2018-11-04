@@ -10,10 +10,15 @@
         <div v-if="!currentUser" slot="body">
           <login type="popup" @close="closeModalAndLogInUser"></login>
         </div>
-        <div v-else slot="body">
+        <div class="has-text-centered" v-else slot="body">
+          <router-link tag="span" to="closeModalAndGoToCabinet">
+            <a class="button is-warning is-rounded is-large m-2">
+              Go to personal cabinet
+            </a>
+          </router-link>
           <logout @close="closeModalAndLogOutUser"></logout>
         </div>
-        <h3 slot="header">{{ !currentUser ? 'Sign In' : 'Sign out' }}</h3>
+        <h3 slot="header">{{ !currentUser ? 'Sign In' : '' }}</h3>
       </modal>
     </div>
   </div>  
@@ -57,6 +62,10 @@ export default {
     closeModalAndLogInUser () {
       this.showModal = false
       this.currentUser = firebase.auth().currentUser
+    },
+    closeModalAndGoToCabinet () {
+      this.showModal = false
+      return { path: '/personal-cabinet' }
     }
   }
 }
@@ -64,7 +73,9 @@ export default {
 
 <style lang="scss">
 @import '~bulma/sass/utilities/all';
-
+  .m-2 {
+    margin: 2rem 0;
+  }
   .header {
     padding: 1.5rem 0;
     display: flex;
