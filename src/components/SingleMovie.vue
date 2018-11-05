@@ -1,7 +1,7 @@
 <template>
-  <div class="single-movie has-background-black" data-test="single-movie-container">
+  <div class="single-movie has-background-black">
 
-    <router-link :to="movieLink" @click="alert('it works')">
+    <router-link :to="movieLink" @click="alert('it works')" data-test="movie-link">
       <img v-if="posterPath" class="single-movie__poster" :src="posterPath" :alt="movie.title">
       <h2 v-else class="title is-size-4 single-movie__no-image-text">There are no image yet...</h2>
     </router-link>
