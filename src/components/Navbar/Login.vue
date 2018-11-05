@@ -24,14 +24,19 @@
         Create one right now :)
       </router-link>
     </p>
+    <div class="title is-size-4 has-text-white-ter has-text-centered">Or</div>
+     <google-login @close="closeAndNotify"></google-login>
   </form>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
-
+import GoogleLogin from './GoogleLogin'
 export default {
+  components: {
+    GoogleLogin
+  },
   data () {
     return {
       email: '',

@@ -15,6 +15,7 @@
         <loader type="cards" v-show="loading"></loader>
 
         <div
+        v-if="results"
         class="column is-12 is-full-desktop is-half-fullhd"
         v-for="movie in results"
         :key="movie.id">

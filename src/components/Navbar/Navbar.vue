@@ -11,11 +11,9 @@
           <login type="popup" @close="showModal = false"></login>
         </div>
         <div class="has-text-centered" v-else slot="body">
-          <router-link tag="span" to="closeModalAndGoToCabinet">
-            <a class="button is-warning is-rounded is-large m-2 ">
+            <button @click="closeModalAndGoToCabinet" class="button is-warning is-rounded is-large m-2 ">
               Go to personal cabinet
-            </a>
-          </router-link>
+            </button>
           <logout @close="showModal = false"></logout>
         </div>
         <h3 slot="header">{{ !isUserLoggedIn ? 'Sign In' : '' }}</h3>
@@ -41,7 +39,7 @@ export default {
     User,
     Modal,
     Login,
-    Logout
+    Logout,
   },
   data () {
     return {
@@ -56,7 +54,7 @@ export default {
   methods: {
     closeModalAndGoToCabinet () {
       this.showModal = false
-      return { path: '/personal-cabinet' }
+      this.$router.push('/personal-cabinet')
     }
   }
 }

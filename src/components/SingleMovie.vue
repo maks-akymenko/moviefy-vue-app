@@ -11,8 +11,9 @@
         <h2 class="single-movie__title title is-size-2 is-size-5-mobile has-text-white-ter">{{ movie.title }}{{ formattedDate }}</h2>
       </router-link>
 
-      <div class="single-movie__genres" v-if="movieGenres">
+      <div class="single-movie__genres">
         <a
+          v-if="movieGenres"
           v-for="genre in movieGenres"
           :key="genre.id"
           class="tag is-rounded is-warning movie-card__genre"
@@ -76,13 +77,9 @@ export default {
     },
     movieGenres () {
       let genres = []
-      
       if (this.movie && this.movie.genre_ids) {
        return genres = this.movie.genre_ids
           .map(genreId => this.getGenre(genreId))
-      } else if (this.movie && this.movie.genres) {
-        return genres = this.movie.genres
-          .map(genreId => this.getGenre(genreId.id))
       }
     },
   },
