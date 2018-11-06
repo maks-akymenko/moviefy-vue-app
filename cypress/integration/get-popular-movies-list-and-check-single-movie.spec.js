@@ -17,5 +17,26 @@ describe('popular movies view', () => {
     cy.get('[data-test="movie-link"]')
       .first()
       .click()
+    
+    cy.url('/movie/3*')
+      .wait('@APIGetMovie')
+      .then(({ status }) => {
+        expect(status).to.eq(200, 'should receive single movie info')
+      })
+      .wait('@APIGetMovieVideo')
+      .then(({ status }) => {
+        expect(status).to.eq(200, 'should get movie trailer')
+      })
+      .wait('@APIGetSimilarMovies')
+      .then(({ status }) => {
+        expect(status).to.eq(200, 'should receive similar movies list')
+      })
+
+      cy.get('.logo__link--medium')
+        .click()
+
+      cy.location().should((loc) => {
+        expect(loc.pathname).to.eq('/movies')
+      })
   })
 })

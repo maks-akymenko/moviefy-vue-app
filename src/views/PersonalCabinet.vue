@@ -2,7 +2,9 @@
   <div class="personal-cabinet container section">
     <h1 class="title is-size-1 has-text-centered has-text-white-ter">Welcome to your personal cabinet</h1>
     <div class="columns is-multiline personal-cabinet__columns">
-        <div class="personal-cabinet__options"><span>Favorite movies</span></div>
+        <div class="personal-cabinet__options">
+          <router-link to="/movies-favorite">Favorite movies</router-link>
+        </div>
         <div class="personal-cabinet__options"><span>Search by genres</span></div>
         <div class="personal-cabinet__options"><span>Sort movies</span></div>
       </div>

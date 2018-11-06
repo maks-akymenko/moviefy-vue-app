@@ -11,7 +11,7 @@
           <login type="popup" @close="showModal = false"></login>
         </div>
         <div class="has-text-centered" v-else slot="body">
-            <button @click="closeModalAndGoToCabinet" class="button is-warning is-rounded is-large m-2 ">
+            <button @click="closeModalAndGoToCabinet" class="button is-warning is-rounded is-large m-2" data-test="personal-cabinet-button">
               Go to personal cabinet
             </button>
           <logout @close="showModal = false"></logout>
