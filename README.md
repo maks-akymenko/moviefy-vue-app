@@ -1,21 +1,16 @@
-# movie-app
+# movie-app made with love as a challenging myself. I just wanted to try, if I could build an applicaton like that from scratch. 
 
-## Project setup
-```
-npm install
-```
+## I did. 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### You can take a look at alive version here, if Heroku still serves it ;) https://vue-moviefy-app-made-wth-love.herokuapp.com/#/movies
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Of course, you can run it locally. Just do 
 
-### Lints and fixes files
-```
-npm run lint
-```
+`git clone https://github.com/maximakymenko/Moviefy-Vue.git`
+`cd Moviefy-Vue`
+`npm install`
+`npm run serve`
+To run E2E tests do the following: 
+`./node_modules/.bin/cypress open`
+
+Hope you will like it. 
