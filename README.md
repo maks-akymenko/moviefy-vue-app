@@ -1,10 +1,10 @@
-# movie-app made with love as a challenging myself. I just wanted to try, if I could build an applicaton like that from scratch. 
+### movie-app made with love as a challenge myself. I just wanted to try, if I could build an applicaton like that from scratch. 
 
-## I did. 
+#### I did. 
 
-### You can take a look at alive version here, if Heroku still serves it ;) https://vue-moviefy-app-made-wth-love.herokuapp.com/#/movies
+#### You can take a look at alive version here, if Heroku still serves it ;) https://vue-moviefy-app-made-wth-love.herokuapp.com/#/movies
 
-## Of course, you can run it locally. Just do 
+### Of course, you can run it locally. Just do 
 
 `git clone https://github.com/maximakymenko/Moviefy-Vue.git`
 `cd Moviefy-Vue`
