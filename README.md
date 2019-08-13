@@ -6,10 +6,12 @@
 
 ### Of course, you can run it locally. Just do 
 
-`git clone https://github.com/maximakymenko/Moviefy-Vue.git`  
-`cd Moviefy-Vue`  
-`npm install`  
-`npm run serve`  
+```
+git clone https://github.com/maximakymenko/Moviefy-Vue.git
+cd Moviefy-Vue
+npm install 
+npm run serve
+```
 To run E2E tests do the following:  
 `./node_modules/.bin/cypress open`  
 
